@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xiên Sạch Online – Đặt hàng nhanh</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-orange-50 text-slate-800">
+
+<!-- TOP BAR -->
+<div class="bg-slate-900 text-white text-center text-xs md:text-sm py-2 px-3">
+  🚚 Nhận đơn trong bán kính 3–5km • ⏱️ Giao nhanh 20–40 phút • ✅ Làm trong ngày
+</div>
+
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+  <div class="max-w-6xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">🍢 XIÊN SẠCH ONLINE</h1>
+        <p class="text-sm md:text-base opacity-95 mt-1">
+          Xiên que sạch – nguyên liệu rõ nguồn – sốt ngon, ăn là ghiền
+        </p>
+      </div>
+
+      <a href="#combo"
+         class="hidden md:inline-flex items-center gap-2 bg-white/15 hover:bg-white/20 px-4 py-2 rounded-xl font-bold">
+        Xem combo
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- Badges -->
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="bg-white/15 px-3 py-1 rounded-full text-xs font-semibold">Không bán đồ qua ngày</span>
+      <span class="bg-white/15 px-3 py-1 rounded-full text-xs font-semibold">Sốt tách riêng</span>
+      <span class="bg-white/15 px-3 py-1 rounded-full text-xs font-semibold">Đặt xong gọi xác nhận</span>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-6xl mx-auto px-4 py-10">
+
+  <!-- HERO -->
+  <section class="bg-white rounded-3xl shadow-lg p-6 md:p-8 mb-10">
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div>
+        <h2 class="text-xl md:text-2xl font-extrabold">
+          Đặt combo nhanh – Chọn nước chấm – Giao tới tận nơi
+        </h2>
+        <p class="mt-2 text-slate-600">
+          Bạn chỉ cần chọn combo phù hợp, tick nước chấm yêu thích, nhập thông tin giao hàng.
+          Shop nhận đơn và liên hệ xác nhận ngay.
+        </p>
+
+        <div class="mt-4 flex flex-col sm:flex-row gap-3">
+          <a href="#combo"
+             class="inline-flex justify-center items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-5 py-3 rounded-2xl">
+            🛒 Chọn combo ngay
+          </a>
+          <a href="#faq"
+             class="inline-flex justify-center items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-extrabold px-5 py-3 rounded-2xl">
+            ❓ Câu hỏi nhanh
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-orange-50 rounded-2xl p-5 border border-orange-100">
+        <div class="text-sm font-extrabold text-slate-900 mb-2">Ưu đãi hôm nay</div>
+        <ul class="text-sm text-slate-700 space-y-2">
+          <li>✅ Tặng 1 gói sốt me khi đặt Combo Gia Đình (tuỳ ngày)</li>
+          <li>✅ Có tuỳ chọn “ít cay / nhiều sốt” theo yêu cầu</li>
+          <li>✅ Đơn từ 89k ưu tiên giao nhanh</li>
+        </ul>
+        <p class="text-xs text-slate-500 mt-3">
+          Lưu ý: Ưu đãi thay đổi theo ngày. Shop sẽ xác nhận khi gọi lại.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMBO SECTION -->
+  <section id="combo" class="mb-12">
+    <div class="flex items-end justify-between gap-4 mb-6">
+      <div>
+        <h3 class="text-2xl md:text-3xl font-extrabold">🔥 Combo bán chạy</h3>
+        <p class="text-slate-600 mt-1 text-sm md:text-base">Chọn combo phù hợp nhu cầu, bấm “Đặt combo” để điền thông tin.</p>
+      </div>
+      <div class="hidden md:block text-xs text-slate-500">
+        Tip: Combo càng lớn càng lợi tiền ship.
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+
+      <!-- Combo Card 1 -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+        <img class="h-44 w-full object-cover"
+             src="https://images.unsplash.com/photo-1604908554160-8b0bfaedb31f?auto=format&fit=crop&w=1200&q=70"
+             alt="Combo Cá Nhân">
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h4 class="text-xl font-extrabold">Combo Cá Nhân</h4>
+              <p class="text-sm text-slate-600 mt-1">Ăn vặt một mình, gọn – ngon – no vừa.</p>
+            </div>
+            <span class="bg-orange-100 text-orange-700 text-xs font-extrabold px-3 py-1 rounded-full">
+              10 xiên
+            </span>
+          </div>
+
+          <div class="mt-3 text-sm text-slate-700 leading-6">
+            <div class="font-bold text-slate-900 mb-1">Gồm có:</div>
+            • 3 xiên bò<br>
+            • 3 xiên cá viên<br>
+            • 2 xiên xúc xích<br>
+            • 2 xiên đậu hũ
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-lg font-extrabold text-red-600">49.000đ</div>
+            <div class="text-xs text-slate-500">Phù hợp 1 người</div>
+          </div>
+
+          <button
+            class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-extrabold py-3 rounded-2xl"
+            onclick="openForm({
+              comboLabel: 'Combo Cá Nhân (10 xiên)',
+              comboMix: '3 bò + 3 cá viên + 2 xúc xích + 2 đậu hũ',
+              price: 49000
+            })">
+            🛒 Đặt combo này
+          </button>
+        </div>
+      </div>
+
+      <!-- Combo Card 2 (Best seller) -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-orange-400">
+        <img class="h-44 w-full object-cover"
+             src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1200&q=70"
+             alt="Combo Gia Đình">
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h4 class="text-xl font-extrabold">Combo Gia Đình</h4>
+              <p class="text-sm text-slate-600 mt-1">Ngon cho 2–3 người, dễ chốt đơn nhất.</p>
+            </div>
+            <span class="bg-orange-100 text-orange-700 text-xs font-extrabold px-3 py-1 rounded-full">
+              20 xiên
+            </span>
+          </div>
+
+          <div class="mt-3 text-sm text-slate-700 leading-6">
+            <div class="font-bold text-slate-900 mb-1">Gồm có:</div>
+            • 6 xiên bò<br>
+            • 6 xiên cá viên<br>
+            • 4 xiên xúc xích<br>
+            • 4 xiên đậu hũ
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-lg font-extrabold text-red-600">89.000đ</div>
+            <div class="text-xs text-slate-500">Best seller</div>
+          </div>
+
+          <button
+            class="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white font-extrabold py-3 rounded-2xl"
+            onclick="openForm({
+              comboLabel: 'Combo Gia Đình (20 xiên)',
+              comboMix: '6 bò + 6 cá viên + 4 xúc xích + 4 đậu hũ',
+              price: 89000
+            })">
+            ⭐ Bán chạy nhất – Đặt ngay
+          </button>
+        </div>
+      </div>
+
+      <!-- Combo Card 3 -->
+      <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+        <img class="h-44 w-full object-cover"
+             src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=70"
+             alt="Combo Tụ Họp">
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h4 class="text-xl font-extrabold">Combo Tụ Họp / Văn Phòng</h4>
+              <p class="text-sm text-slate-600 mt-1">No đã, hợp nhóm 3–5 người.</p>
+            </div>
+            <span class="bg-orange-100 text-orange-700 text-xs font-extrabold px-3 py-1 rounded-full">
+              30 xiên
+            </span>
+          </div>
+
+          <div class="mt-3 text-sm text-slate-700 leading-6">
+            <div class="font-bold text-slate-900 mb-1">Gồm có:</div>
+            • 10 xiên bò<br>
+            • 10 xiên cá viên<br>
+            • 6 xiên xúc xích<br>
+            • 4 xiên đậu hũ
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-lg font-extrabold text-red-600">139.000đ</div>
+            <div class="text-xs text-slate-500">Nhóm đông</div>
+          </div>
+
+          <button
+            class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-extrabold py-3 rounded-2xl"
+            onclick="openForm({
+              comboLabel: 'Combo Tụ Họp (30 xiên)',
+              comboMix: '10 bò + 10 cá viên + 6 xúc xích + 4 đậu hũ',
+              price: 139000
+            })">
+            🛒 Đặt combo này
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Note -->
+    <div class="mt-6 text-xs md:text-sm text-slate-600 bg-white rounded-2xl p-4 border border-orange-100">
+      <b>Mẹo đặt nhanh:</b> Chọn combo phù hợp, chọn nước chấm + mức cay, ghi chú “ít cay / nhiều sốt” nếu cần.
+      Shop sẽ gọi xác nhận trước khi giao.
+    </div>
+  </section>
+
+  <!-- ORDER FORM -->
+  <section id="orderForm" class="hidden mb-12">
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-orange-100">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-2xl font-extrabold">📝 Thông tin đặt hàng</h3>
+          <p class="text-slate-600 text-sm mt-1">Vui lòng nhập đúng thông tin để ship nhanh.</p>
+        </div>
+
+        <button type="button" onclick="closeForm()"
+                class="rounded-xl px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-extrabold">
+          ✕
+        </button>
+      </div>
+
+      <!-- Selected summary -->
+      <div class="mt-5 grid md:grid-cols-3 gap-4">
+        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
+          <div class="text-xs text-slate-600">Combo đã chọn</div>
+          <div id="comboText" class="font-extrabold text-slate-900 mt-1">—</div>
+          <div id="comboMixText" class="text-sm text-slate-700 mt-2 leading-6">—</div>
+        </div>
+
+        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
+          <div class="text-xs text-slate-600">Giá tạm tính</div>
+          <div class="font-extrabold text-red-600 text-xl mt-1" id="priceText">0đ</div>
+          <div class="text-xs text-slate-500 mt-2">Chưa gồm phí ship (nếu có).</div>
+        </div>
+
+        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
+          <div class="text-xs text-slate-600">Khu vực giao</div>
+          <div class="font-extrabold text-slate-900 mt-1">3–5 km</div>
+          <div class="text-xs text-slate-500 mt-2">Ngoài khu vực: vui lòng nhắn trước.</div>
+        </div>
+      </div>
+
+      <form class="mt-6" method="post" action="/order" onsubmit="prepareOrderPayload()">
+        <!-- Hidden fields that backend will read -->
+        <input type="hidden" name="combo" id="comboInput">
+        <input type="hidden" name="price" id="priceInput">
+        <input type="hidden" name="sauce" id="sauceInput">
+        <input type="hidden" name="spicy" id="spicyInput">
+
+        <!-- Customer info -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-bold">Tên khách *</label>
+            <input name="name" required
+                   placeholder="Ví dụ: Anh Khánh"
+                   class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-300">
+          </div>
+
+          <div>
+            <label class="text-sm font-bold">Số điện thoại *</label>
+            <input name="phone" required
+                   inputmode="tel"
+                   placeholder="Ví dụ: 09xxxxxxxx"
+                   class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-300">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="text-sm font-bold">Địa chỉ giao hàng *</label>
+            <input name="address" required
+                   placeholder="Số nhà, đường, phường/xã, quận/huyện..."
+                   class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-300">
+          </div>
+        </div>
+
+        <!-- Sauce -->
+        <div class="mt-6">
+          <div class="flex items-center justify-between">
+            <label class="text-sm font-bold">🥣 Chọn nước chấm (có thể chọn nhiều)</label>
+            <span class="text-xs text-slate-500">Nếu không chọn: shop để mặc định</span>
+          </div>
+
+          <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl p-3 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4" name="sauce_option" value="Tương ớt 🌶️">
+              <div>
+                <div class="font-extrabold">Tương ớt 🌶️</div>
+                <div class="text-xs text-slate-500">Hợp ăn cay nhẹ – thơm</div>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl p-3 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4" name="sauce_option" value="Tương cà 🍅">
+              <div>
+                <div class="font-extrabold">Tương cà 🍅</div>
+                <div class="text-xs text-slate-500">Ngọt nhẹ – trẻ em thích</div>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl p-3 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4" name="sauce_option" value="Sốt me 🍯">
+              <div>
+                <div class="font-extrabold">Sốt me 🍯</div>
+                <div class="text-xs text-slate-500">Chua ngọt – cực bắt vị</div>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl p-3 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4" name="sauce_option" value="Sốt tỏi ớt 🧄">
+              <div>
+                <div class="font-extrabold">Sốt tỏi ớt 🧄</div>
+                <div class="text-xs text-slate-500">Đậm đà – thơm tỏi</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Spicy level -->
+        <div class="mt-6">
+          <label class="text-sm font-bold">🌶️ Mức cay</label>
+          <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <label class="flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-2xl p-3 cursor-pointer">
+              <input type="radio" name="spicy_level" value="Không cay" checked>
+              <span class="font-extrabold">Không cay</span>
+            </label>
+            <label class="flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-2xl p-3 cursor-pointer">
+              <input type="radio" name="spicy_level" value="Cay nhẹ">
+              <span class="font-extrabold">Cay nhẹ</span>
+            </label>
+            <label class="flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-2xl p-3 cursor-pointer">
+              <input type="radio" name="spicy_level" value="Cay vừa">
+              <span class="font-extrabold">Cay vừa</span>
+            </label>
+            <label class="flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-2xl p-3 cursor-pointer">
+              <input type="radio" name="spicy_level" value="Cay nhiều">
+              <span class="font-extrabold">Cay nhiều</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Note -->
+        <div class="mt-6">
+          <label class="text-sm font-bold">📝 Ghi chú thêm (tuỳ chọn)</label>
+          <textarea name="note" rows="3"
+                    placeholder="Ví dụ: ít cay, nhiều sốt me, gọi trước khi tới..."
+                    class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-300"></textarea>
+          <div class="text-xs text-slate-500 mt-2">
+            Bạn có thể ghi: “ít cay”, “nhiều sốt”, “không hành”, “giao sau 19:00”...
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="mt-7 flex flex-col sm:flex-row gap-3">
+          <button type="submit"
+                  class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-extrabold py-3 rounded-2xl">
+            ✅ Xác nhận đặt hàng
+          </button>
+          <button type="button" onclick="closeForm()"
+                  class="sm:w-40 bg-slate-100 hover:bg-slate-200 text-slate-900 font-extrabold py-3 rounded-2xl">
+            Đóng
+          </button>
+        </div>
+
+        <div class="mt-4 text-xs text-slate-500">
+          Bấm “Xác nhận đặt hàng” nghĩa là bạn đồng ý để shop liên hệ xác nhận đơn.
+        </div>
+      </form>
+      <!-- QR THANH TOÁN (TUỲ CHỌN) -->
+<div class="mt-6 bg-orange-50 border border-orange-200 rounded-2xl p-4">
+  <h4 class="font-extrabold mb-2">💳 Thanh toán (tuỳ chọn)</h4>
+
+  <p class="text-sm text-slate-700 mb-3">
+    Bạn có thể chuyển khoản trước để shop xử lý đơn nhanh hơn.
+    <br>
+    Hoặc thanh toán khi nhận hàng (COD).
+  </p>
+
+  <img src="/static/qr.png"
+       alt="QR chuyển khoản"
+       class="mx-auto w-40 rounded-xl shadow">
+
+  <p class="text-xs text-slate-500 text-center mt-2">
+    Nội dung chuyển khoản: <b>Tên + SĐT</b>
+  </p>
+</div>
+
+    </div>
+  </section>
+
+
+
+  <!-- FAQ -->
+  <section id="faq" class="mb-14">
+    <h3 class="text-2xl font-extrabold mb-5">❓ Câu hỏi thường gặp</h3>
+
+    <div class="space-y-4">
+      <div class="bg-white rounded-2xl shadow p-5">
+        <div class="font-extrabold">Có mất phí đặt hàng không?</div>
+        <div class="text-slate-600 mt-1">Không. Bạn đặt miễn phí, shop chỉ tính tiền món + ship (nếu có).</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-5">
+        <div class="font-extrabold">Bao lâu nhận được hàng?</div>
+        <div class="text-slate-600 mt-1">Thông thường 20–40 phút tuỳ khoảng cách và lượng đơn.</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow p-5">
+        <div class="font-extrabold">Nước chấm chọn nhiều loại được không?</div>
+        <div class="text-slate-600 mt-1">Được. Bạn tick nhiều loại, shop chuẩn bị theo đúng yêu cầu.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FLOATING CTA (mobile friendly) -->
+<button
+  type="button"
+  onclick="scrollToCombo()"
+  class="fixed bottom-4 right-4 z-40 bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-4 py-3 rounded-2xl shadow-xl">
+  🛒 Chọn combo
+</button>
+
+<!-- FOOTER -->
+<footer class="bg-white border-t border-orange-100">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600">
+    <div class="font-extrabold text-slate-900">Xiên Sạch Online</div>
+    <div class="mt-1">Giờ nhận đơn: 16:00 – 22:30 (tuỳ ngày)</div>
+    <div class="mt-1">Hotline/ Zalo: (điền số của bạn)</div>
+  </div>
+</footer>
+
+<script>
+  // Keep selected combo in memory
+  let selectedCombo = {
+    comboLabel: "",
+    comboMix: "",
+    price: 0
+  };
+
+  function formatVND(n) {
+    try {
+      return new Intl.NumberFormat("vi-VN").format(n) + "đ";
+    } catch {
+      return n + "đ";
+    }
+  }
+
+  function openForm(comboObj) {
+    selectedCombo = comboObj;
+
+    document.getElementById("comboText").innerText = comboObj.comboLabel;
+    document.getElementById("comboMixText").innerText = comboObj.comboMix;
+    document.getElementById("priceText").innerText = formatVND(comboObj.price);
+
+    document.getElementById("comboInput").value = comboObj.comboLabel + " | " + comboObj.comboMix;
+    document.getElementById("priceInput").value = comboObj.price;
+
+    // Show section
+    const formSection = document.getElementById("orderForm");
+    formSection.classList.remove("hidden");
+    formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function closeForm() {
+    document.getElementById("orderForm").classList.add("hidden");
+  }
+
+  function scrollToCombo() {
+    document.getElementById("combo").scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Prepare hidden payload values (sauce + spicy)
+  function prepareOrderPayload() {
+    // Sauce (multiple checkboxes -> one string)
+    const sauces = [];
+    document.querySelectorAll('input[name="sauce_option"]:checked')
+      .forEach(el => sauces.push(el.value));
+    document.getElementById("sauceInput").value = sauces.length ? sauces.join(", ") : "Mặc định";
+
+    // Spicy
+    const spicyEl = document.querySelector('input[name="spicy_level"]:checked');
+    document.getElementById("spicyInput").value = spicyEl ? spicyEl.value : "Không cay";
+  }
+</script>
+
+</body>
+</html>
