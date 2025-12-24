@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Đặt hàng thành công</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-orange-50 flex items-center justify-center min-h-screen px-4">
+
+  <div class="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 text-center">
+
+    <!-- ICON -->
+    <div class="text-5xl mb-2">✅</div>
+
+    <!-- TIÊU ĐỀ -->
+    <h1 class="text-2xl font-extrabold text-green-600">
+      Đặt hàng thành công!
+    </h1>
+
+    <!-- CẢM ƠN -->
+    <p class="text-slate-700 mt-3">
+      Cảm ơn <b>{{ name }}</b> đã ủng hộ <b>Xiên Sạch Online</b> ❤️
+    </p>
+
+    <p class="text-slate-600 text-sm mt-2">
+      Shop sẽ liên hệ xác nhận đơn trong ít phút.<br>
+      Vui lòng để ý điện thoại giúp shop nhé!
+    </p>
+
+    <!-- TỔNG TIỀN -->
+    <div class="mt-4 bg-orange-50 border border-orange-200 rounded-2xl p-4">
+      <div class="text-sm text-slate-600">💰 Tổng thanh toán</div>
+      <div class="text-2xl font-extrabold text-orange-600">
+        {{ total }}đ
+      </div>
+    </div>
+
+    <!-- QR MB BANK -->
+    <div class="mt-4">
+      <img
+        src="/static/qr.png"
+        alt="QR chuyển khoản MB Bank"
+        class="mx-auto w-52 rounded-xl border"
+      />
+    </div>
+
+    <!-- NỘI DUNG CHUYỂN KHOẢN -->
+    <div class="mt-4 text-sm text-slate-700">
+      <p><b>Nội dung chuyển khoản:</b></p>
+
+      <div
+        id="ckText"
+        class="mt-1 bg-slate-100 rounded-xl px-3 py-2 font-mono text-sm break-all"
+      >
+        XIENSACH {{ phone }}
+      </div>
+
+      <button
+        onclick="copyCK()"
+        class="mt-2 w-full bg-slate-800 text-white py-2 rounded-xl hover:bg-slate-900"
+      >
+        📋 Copy nội dung chuyển khoản
+      </button>
+    </div>
+
+    <!-- QUAY LẠI -->
+    <a
+      href="/"
+      class="block mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white font-extrabold py-3 rounded-2xl hover:from-orange-600 hover:to-red-600"
+    >
+      ⬅ Quay lại trang chủ
+    </a>
+
+    <p class="text-xs text-slate-400 mt-4">
+      Chúc bạn ăn ngon miệng 😋
+    </p>
+
+  </div>
+
+  <script>
+    function copyCK() {
+      const text = document.getElementById("ckText").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Đã copy nội dung chuyển khoản!");
+      });
+    }
+  </script>
+
+</body>
+</html>
