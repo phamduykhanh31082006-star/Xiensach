@@ -1,9 +1,20 @@
 from flask import Flask, render_template, request
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 import requests
+import time
 
 app = Flask(__name__)
+
+# =========================
+# CONFIG – CHỈ CẦN ĐỔI 3 DÒNG NÀY
+# =========================
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6TTf_SUN616jNvubvh80bQN3omoa1KKNVWoXd-Sp4UkUy4OGtOs85X4WDVOf8Kg2L/exec"
+TELEGRAM_BOT_TOKEN = "8338747162:AAFnIT2NHXD0ha--Mp5ZsCvMNHr7pDIYxyg"
+TELEGRAM_CHAT_ID = "6285097453"
+
+ORDER_LIMIT_SECONDS = 180  # 3 phút
+order_cache = {}
 
 # =========================
 # TRANG CHỦ
@@ -12,34 +23,49 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-
 # =========================
 # XỬ LÝ ĐẶT HÀNG
 # =========================
 @app.route("/order", methods=["POST"])
 def order():
-    # Thông tin khách
-    name = request.form.get("name")
+    # ========= CHỐNG SPAM – HONEYPOT =========
+    if request.form.get("website"):
+        return "Spam detected", 400
+
+    # ========= GIỚI HẠN 1 ĐƠN / 3 PHÚT =========
     phone = request.form.get("phone")
+    now_ts = time.time()
+    last_time = order_cache.get(phone)
+
+    if last_time and now_ts - last_time < ORDER_LIMIT_SECONDS:
+        return """
+        <h2>⚠️ Bạn đặt đơn quá nhanh</h2>
+        <p>Vui lòng chờ vài phút rồi thử lại.</p>
+        """
+
+    order_cache[phone] = now_ts
+
+    # ========= THÔNG TIN KHÁCH =========
+    name = request.form.get("name")
     address = request.form.get("address")
 
-    # Thông tin đơn hàng
+    # ========= THÔNG TIN ĐƠN =========
     combo = request.form.get("combo")
     price = request.form.get("price")
     sauce = request.form.get("sauce")
     spicy = request.form.get("spicy")
     note = request.form.get("note")
 
-    # Thời gian đặt
-    time_now = datetime.now(ZoneInfo("Asia/Ho_Chi_Minh")).strftime("%d/%m/%Y %H:%M:%S")
+    drink = request.form.get("drink")
+    tobacco = request.form.get("tobacco")
+    total = request.form.get("total")
 
+    # ========= THỜI GIAN VN =========
+    time_now = datetime.now(
+        ZoneInfo("Asia/Ho_Chi_Minh")
+    ).strftime("%d/%m/%Y %H:%M:%S")
 
-    # =========================
-    # LINK GOOGLE APPS SCRIPT
-    # =========================
-    google_script_url = "https://script.google.com/macros/s/AKfycbx6TTf_SUN616jNvubvh80bQN3omoa1KKNVWoXd-Sp4UkUy4OGtOs85X4WDVOf8Kg2L/exec"
-
-    # Dữ liệu gửi lên Google Sheet
+    # ========= GỬI GOOGLE SHEET =========
     data = {
         "time": time_now,
         "name": name,
@@ -49,71 +75,58 @@ def order():
         "price": price,
         "sauce": sauce,
         "spicy": spicy,
+        "drink": drink,
+        "tobacco": tobacco,
+        "total": total,
         "note": note
     }
 
     try:
-        requests.post(google_script_url, json=data, timeout=10)
-        return """
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đặt hàng thành công</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+        requests.post(GOOGLE_SCRIPT_URL, json=data, timeout=10)
+    except:
+        pass
 
-<body class="bg-orange-50 flex items-center justify-center min-h-screen px-4">
+    # ========= GỬI TELEGRAM =========
+    telegram_msg = f"""
+🧾 ĐƠN HÀNG MỚI
+⏰ {time_now}
 
-  <div class="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 text-center">
+👤 {name}
+📞 {phone}
+📍 {address}
 
-    <div class="text-5xl mb-3">✅</div>
+🍢 Combo: {combo}
+🥫 Sốt: {sauce}
+🌶 Cay: {spicy}
+🥤 Nước: {drink}
+🚬 Thuốc: {tobacco}
 
-    <h1 class="text-2xl font-extrabold text-green-600">
-      Đặt hàng thành công!
-    </h1>
-
-    <p class="text-slate-700 mt-3">
-      Cảm ơn bạn đã ủng hộ <b>Xiên Sạch Online</b> ❤️
-    </p>
-
-    <p class="text-slate-600 text-sm mt-2">
-      Shop sẽ <b>liên hệ xác nhận đơn</b> trong ít phút.
-      <br>
-      Vui lòng để ý điện thoại giúp shop nhé!
-    </p>
-
-    <div class="mt-5 bg-orange-50 border border-orange-200 rounded-2xl p-4 text-sm text-slate-700">
-      💳 <b>Thanh toán (tuỳ chọn)</b><br>
-      Bạn có thể chuyển khoản trước để shop xử lý nhanh hơn,
-      hoặc thanh toán khi nhận hàng (COD).
-    </div>
-
-    <a href="/"
-       class="block mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white font-extrabold py-3 rounded-2xl hover:from-orange-600 hover:to-red-600">
-      ⬅ Quay lại trang chủ
-    </a>
-
-    <p class="text-xs text-slate-400 mt-4">
-      Chúc bạn ăn ngon miệng 😋
-    </p>
-
-  </div>
-
-</body>
-</html>
+💰 Tổng tiền: {total}đ
+📝 Ghi chú: {note}
 """
 
-    except Exception as e:
-        return """
-        <h2>❌ Có lỗi xảy ra</h2>
-        <p>Vui lòng thử lại hoặc liên hệ shop.</p>
-        """
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot8338747162:AAFnIT2NHXD0ha--Mp5ZsCvMNHr7pDIYxyg/sendMessage",
+            json={
+                "chat_id": 6285097453,
+                "text": telegram_msg
+            },
+            timeout=5
+        )
+    except:
+        pass
 
+    # ========= TRANG THÀNH CÔNG =========
+    return render_template(
+        "success.html",
+        name=name,
+        phone=phone,
+        total=total
+    )
 
 # =========================
-# CHẠY LOCAL
+# CHẠY LOCAL / RENDER
 # =========================
 if __name__ == "__main__":
     app.run(debug=True)

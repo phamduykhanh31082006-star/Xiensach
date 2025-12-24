@@ -228,6 +228,7 @@
     </div>
   </section>
 
+
   <!-- ORDER FORM -->
   <section id="orderForm" class="hidden mb-12">
     <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-orange-100">
@@ -257,6 +258,7 @@
           <div class="text-xs text-slate-500 mt-2">Chưa gồm phí ship (nếu có).</div>
         </div>
 
+
         <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
           <div class="text-xs text-slate-600">Khu vực giao</div>
           <div class="font-extrabold text-slate-900 mt-1">3–5 km</div>
@@ -265,11 +267,27 @@
       </div>
 
       <form class="mt-6" method="post" action="/order" onsubmit="prepareOrderPayload()">
+
         <!-- Hidden fields that backend will read -->
         <input type="hidden" name="combo" id="comboInput">
         <input type="hidden" name="price" id="priceInput">
         <input type="hidden" name="sauce" id="sauceInput">
         <input type="hidden" name="spicy" id="spicyInput">
+        <!-- === NEW: dữ liệu phát sinh === -->
+        <input type="hidden" name="drink" id="drinkInput">
+        <input type="hidden" name="tobacco" id="tobaccoInput">
+        <input type="hidden" name="total" id="totalInput">
+
+
+          <!-- === HONEYPOT chống spam (KHÔNG XÓA) === -->
+       <input
+        type="text"
+         name="website"
+         tabindex="-1"
+        autocomplete="off"
+        class="hidden"
+         >
+
 
         <!-- Customer info -->
         <div class="grid md:grid-cols-2 gap-4">
@@ -361,6 +379,38 @@
           </div>
         </div>
 
+<!-- === NEW: Nước uống & Thuốc lá === -->
+<div class="mt-6 grid md:grid-cols-2 gap-4">
+
+  <!-- NƯỚC -->
+  <div>
+    <label class="text-sm font-bold">🥤 Nước uống (tuỳ chọn)</label>
+    <select id="drinkSelect"
+      class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-orange-300">
+      <option value="" data-price="0">Không chọn</option>
+      <option value="Trà tắc" data-price="10000">Trà tắc – 10.000đ</option>
+      <option value="Pepsi" data-price="12000">Pepsi – 12.000đ</option>
+      <option value="Sting" data-price="12000">Sting – 12.000đ</option>
+      <option value="Nước suối" data-price="8000">Nước suối – 8.000đ</option>
+    </select>
+  </div>
+
+  <!-- THUỐC LÁ -->
+  <div>
+    <label class="text-sm font-bold">🚬 Thuốc lá (18+)</label>
+    <select id="tobaccoSelect"
+      class="mt-1 w-full border border-slate-200 rounded-xl p-3 focus:ring-2 focus:ring-orange-300">
+      <option value="" data-price="0">Không chọn</option>
+      <option value="Thăng Long" data-price="20000">Thăng Long – 20.000đ</option>
+      <option value="555" data-price="35000">555 – 35.000đ</option>
+      <option value="Marlboro" data-price="45000">Marlboro – 45.000đ</option>
+    </select>
+    <p class="text-xs text-slate-500 mt-1">Chỉ bán cho khách đủ 18+</p>
+  </div>
+
+</div>
+
+
         <!-- Note -->
         <div class="mt-6">
           <label class="text-sm font-bold">📝 Ghi chú thêm (tuỳ chọn)</label>
@@ -374,6 +424,13 @@
 
         <!-- Submit -->
         <div class="mt-7 flex flex-col sm:flex-row gap-3">
+                  <!-- === NEW: Tổng tiền === -->
+        <div class="mt-4 p-3 bg-orange-50 rounded-xl border text-center">
+          <div class="text-sm text-slate-600">💰 Tổng thanh toán</div>
+          <div id="totalText" class="text-2xl font-extrabold text-orange-600">
+            0₫
+          </div>
+        </div>
           <button type="submit"
                   class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-extrabold py-3 rounded-2xl">
             ✅ Xác nhận đặt hàng
@@ -503,6 +560,38 @@
     const spicyEl = document.querySelector('input[name="spicy_level"]:checked');
     document.getElementById("spicyInput").value = spicyEl ? spicyEl.value : "Không cay";
   }
+
+  // === NEW: tính tổng tiền ===
+function getExtraPrice(selectId) {
+  const el = document.getElementById(selectId);
+  if (!el) return 0;
+  const opt = el.options[el.selectedIndex];
+  return Number(opt?.dataset?.price || 0);
+}
+
+function updateTotal() {
+  const base = Number(document.getElementById("priceInput")?.value || 0);
+  const drink = getExtraPrice("drinkSelect");
+  const tobacco = getExtraPrice("tobaccoSelect");
+
+  const total = base + drink + tobacco;
+
+  document.getElementById("totalText").innerText = formatVND(total);
+  document.getElementById("totalInput").value = total;
+
+  document.getElementById("drinkInput").value =
+    document.getElementById("drinkSelect")?.value || "Không chọn";
+
+  document.getElementById("tobaccoInput").value =
+    document.getElementById("tobaccoSelect")?.value || "Không chọn";
+}
+
+// gắn sự kiện
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("drinkSelect")?.addEventListener("change", updateTotal);
+  document.getElementById("tobaccoSelect")?.addEventListener("change", updateTotal);
+});
+
 </script>
 
 </body>
