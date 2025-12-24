@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import requests
 
 app = Flask(__name__)
@@ -30,7 +31,8 @@ def order():
     note = request.form.get("note")
 
     # Thời gian đặt
-    time_now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    time_now = datetime.now(ZoneInfo("Asia/Ho_Chi_Minh")).strftime("%d/%m/%Y %H:%M:%S")
+
 
     # =========================
     # LINK GOOGLE APPS SCRIPT
