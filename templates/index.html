@@ -6,6 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<!-- ===== POPUP THÔNG BÁO ===== -->
+<div
+  id="welcomePopup"
+  class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"
+>
+  <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl mx-4">
+    <div class="text-4xl mb-2">🍢</div>
+
+    <h2 class="text-xl font-extrabold text-orange-600">
+      Thông báo
+    </h2>
+
+    <p class="text-slate-700 mt-2">
+      Chúc quý khách ăn ngon miệng 😋<br>
+      Cảm ơn bạn đã ủng hộ <b>Xiên Sạch Online</b>!
+    </p>
+
+    <button
+      onclick="closePopup()"
+      class="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2 rounded-2xl"
+    >
+      Đóng
+    </button>
+  </div>
+</div>
+
+<script>
+  function closePopup() {
+    document.getElementById("welcomePopup").classList.add("hidden");
+    sessionStorage.setItem("popupShown", "1");
+  }
+
+  window.addEventListener("load", () => {
+    const popupShown = sessionStorage.getItem("popupShown");
+
+    if (!popupShown) {
+      const popup = document.getElementById("welcomePopup");
+      popup.classList.remove("hidden");
+
+      // Tự đóng sau 5 giây
+      setTimeout(() => {
+        closePopup();
+      }, 5000);
+    }
+  });
+  <script>
+  function closePopup() {
+    document.getElementById("welcomePopup").classList.add("hidden");
+    sessionStorage.setItem("popupShown", "1");
+  }
+
+  window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("popupShown")) {
+      const popup = document.getElementById("welcomePopup");
+      popup.classList.remove("hidden");
+
+      // Tự ẩn sau 5 giây
+      setTimeout(closePopup, 5000);
+    }
+  });
+</script>
 
 <body class="bg-orange-50 text-slate-800">
 
