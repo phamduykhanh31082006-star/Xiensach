@@ -6,69 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<!-- ===== POPUP THÔNG BÁO ===== -->
-<div
-  id="welcomePopup"
-  class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden"
->
-  <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl mx-4">
-    <div class="text-4xl mb-2">🍢</div>
-
-    <h2 class="text-xl font-extrabold text-orange-600">
-      Thông báo
-    </h2>
-
-    <p class="text-slate-700 mt-2">
-      Chúc quý khách ăn ngon miệng 😋<br>
-      Cảm ơn bạn đã ủng hộ <b>Xiên Sạch Online</b>!
-    </p>
-
-    <button
-      onclick="closePopup()"
-      class="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2 rounded-2xl"
-    >
-      Đóng
-    </button>
-  </div>
-</div>
-
-<script>
-  function closePopup() {
-    document.getElementById("welcomePopup").classList.add("hidden");
-    sessionStorage.setItem("popupShown", "1");
-  }
-
-  window.addEventListener("load", () => {
-    const popupShown = sessionStorage.getItem("popupShown");
-
-    if (!popupShown) {
-      const popup = document.getElementById("welcomePopup");
-      popup.classList.remove("hidden");
-
-      // Tự đóng sau 5 giây
-      setTimeout(() => {
-        closePopup();
-      }, 5000);
-    }
-  });
-  <script>
-  function closePopup() {
-    document.getElementById("welcomePopup").classList.add("hidden");
-    sessionStorage.setItem("popupShown", "1");
-  }
-
-  window.addEventListener("load", () => {
-    if (!sessionStorage.getItem("popupShown")) {
-      const popup = document.getElementById("welcomePopup");
-      popup.classList.remove("hidden");
-
-      // Tự ẩn sau 5 giây
-      setTimeout(closePopup, 5000);
-    }
-  });
-</script>
 
 <body class="bg-orange-50 text-slate-800">
+
+<!-- === THÔNG BÁO CHÀO MỪNG === -->
+<div id="welcomeModal"
+     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+
+  <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl p-6 text-center">
+    <div class="text-3xl mb-3">🍢</div>
+
+    <h2 class="text-xl font-extrabold text-slate-900">
+      Chào mừng bạn đến với Xiên Sạch Online
+    </h2>
+
+    <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+      Shop nhận đơn trong ngày, làm mới từng mẻ.<br>
+      Sau khi bạn đặt hàng, shop sẽ <b>gọi xác nhận</b> trước khi giao.
+    </p>
+
+    <div class="mt-5 flex flex-col gap-3">
+      <button onclick="closeWelcomeModal()"
+              class="w-full rounded-2xl bg-gradient-to-r from-orange-500 to-red-500
+                     py-3 font-extrabold text-white hover:from-orange-600 hover:to-red-600">
+        ✅ Đã hiểu – Đặt combo ngay
+      </button>
+
+      <button onclick="closeWelcomeModal()"
+              class="text-sm text-slate-500 hover:text-slate-700">
+        Đóng
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- TOP BAR -->
 <div class="bg-slate-900 text-white text-center text-xs md:text-sm py-2 px-3">
@@ -133,7 +103,7 @@
         <div class="text-sm font-extrabold text-slate-900 mb-2">Ưu đãi hôm nay</div>
         <ul class="text-sm text-slate-700 space-y-2">
           <li>✅ Tặng 1 gói sốt me khi đặt Combo Gia Đình (tuỳ ngày)</li>
-          <li>✅ Có tuỳ chọn “ít cay / nhiều sốt” theo yêu cầu</li>
+          <li>Các Combo sẽ được tặng nước.</li>
           <li>✅ Đơn từ 89k ưu tiên giao nhanh</li>
         </ul>
         <p class="text-xs text-slate-500 mt-3">
@@ -451,6 +421,7 @@
       <option value="" data-price="0">Không chọn</option>
       <option value="Trà tắc" data-price="10000">Trà tắc – 10.000đ</option>
       <option value="Pepsi" data-price="12000">Pepsi – 12.000đ</option>
+      <option value="Coca Cola" data-price="8000">Coca Cola – 12.000đ</option>
       <option value="Sting" data-price="12000">Sting – 12.000đ</option>
       <option value="Nước suối" data-price="8000">Nước suối – 8.000đ</option>
     </select>
@@ -565,11 +536,17 @@
   <div class="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-600">
     <div class="font-extrabold text-slate-900">Xiên Sạch Online</div>
     <div class="mt-1">Giờ nhận đơn: 16:00 – 22:30 (tuỳ ngày)</div>
-    <div class="mt-1">Hotline/ Zalo: (điền số của bạn)</div>
+    <div class="mt-1">Hotline/ Zalo: 0347599605</div>
   </div>
 </footer>
 
 <script>
+
+ function closeWelcomeModal() {
+    const modal = document.getElementById("welcomeModal");
+    if (modal) modal.style.display = "none";
+  }
+
   // Keep selected combo in memory
   let selectedCombo = {
     comboLabel: "",
