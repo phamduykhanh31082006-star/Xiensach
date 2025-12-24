@@ -9,7 +9,7 @@ app = Flask(__name__)
 # =========================
 # CONFIG – CHỈ CẦN ĐỔI 3 DÒNG NÀY
 # =========================
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsADP_9cAdjI_7Ip5clLFCYUGJvybOPJj_j-7REV5K0PnrOy5ycMZfUyJHG7b4_Le7/exec"
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmccd1loBWTUn__34eUaxBco5PUeFaayvplswexCPEHyiXcvUM0liws9JJsnwAb6I/exec"
 TELEGRAM_BOT_TOKEN = "8338747162:AAFnIT2NHXD0ha--Mp5ZsCvMNHr7pDIYxyg"
 TELEGRAM_CHAT_ID = "6285097453"
 
