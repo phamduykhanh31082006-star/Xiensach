@@ -9,6 +9,9 @@
 
 <body class="bg-orange-50 text-slate-800">
 
+  <div id="top"></div>
+
+
 <!-- === THÔNG BÁO CHÀO MỪNG === -->
 <div id="welcomeModal"
      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
@@ -46,18 +49,59 @@
 </div>
 
 <!-- HEADER -->
-<header class="bg-gradient-to-r from-orange-500 to-red-500 text-white">
+<header
+  id="mainHeader"
+  class="bg-orange-500 md:static sticky top-0 z-50">
+
   <div class="max-w-6xl mx-auto px-4 py-6">
     <div class="flex items-center justify-between gap-4">
+
+<!-- START MENU TOGGLE -->
+<div class="md:hidden">
+  <button id="menuBtn" class="text-2xl md:hidden">☰</button>
+
+  <div
+  id="mobileMenu"
+  class="hidden absolute left-0 mt-2 w-44 bg-white rounded-xl shadow-xl border text-sm overflow-hidden z-[9999]]"
+>
+    <a href="#top" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+      🏠 Trang chủ
+    </a>
+    <a href="#combo" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+      🍢 Combo
+    </a>
+    <a href="#loyalty" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+      ⭐ Tích điểm
+    </a>
+    <a href="#about" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+      👤 Giới thiệu
+    </a>
+    <a href="#contact" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+      📞 Liên hệ
+    </a>
+  </div>
+</div>
+<!-- END MENU TOGGLE -->
+
+
+
       <div>
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">🍢 XIÊN SẠCH ONLINE</h1>
-        <p class="text-sm md:text-base opacity-95 mt-1">
+        <h1
+  class="text-2xl md:text-3xl font-extrabold tracking-tight text-white
+         text-center md:text-left">
+  🚀 XIÊN SẠCH ONLINE
+</h1>
+
+      <p class="hidden md:block text-sm text-white">
           Xiên que sạch – nguyên liệu rõ nguồn – sốt ngon, ăn là ghiền
         </p>
       </div>
 
       <a href="#combo"
-         class="hidden md:inline-flex items-center gap-2 bg-white/15 hover:bg-white/20 px-4 py-2 rounded-xl font-bold">
+          class="hidden md:inline-flex items-center gap-2
+               bg-white/20 hover:bg-white/30
+               px-5 py-3 rounded-2xl
+               font-bold text-white transition">
         Xem combo
         <span aria-hidden="true">→</span>
       </a>
@@ -289,7 +333,7 @@
     <div class="flex gap-3">
       <span class="text-orange-500 font-extrabold">✔</span>
       <span>
-        <b>Đủ 5 điểm</b> → tặng <b>1 xiên bất kỳ</b> hoặc <b>nước uống</b>.
+        <b>Đủ 10 điểm</b> → tặng <b>1 gấu bông</b> hoặc <b>1 phần combo </b>.
       </span>
     </div>
 
@@ -303,7 +347,7 @@
     <div class="flex gap-3">
       <span class="text-orange-500 font-extrabold">✔</span>
       <span>
-        Không cần đăng nhập – không cần app – chỉ cần đặt hàng như bình thường.
+        Bạn chỉ cần thu thập điểm và nhận quà thôi nè.
       </span>
     </div>
 
@@ -579,17 +623,10 @@
         <div class="text-slate-600 mt-1">Được. Bạn tick nhiều loại, shop chuẩn bị theo đúng yêu cầu.</div>
       </div>
     </div>
-  </section>
+<!-- END ABOUT -->
+
 
 </main>
-
-<!-- FLOATING CTA (mobile friendly) -->
-<button
-  type="button"
-  onclick="scrollToCombo()"
-  class="fixed bottom-4 right-4 z-40 bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-4 py-3 rounded-2xl shadow-xl">
-  🛒 Chọn combo
-</button>
 
 <!-- FOOTER -->
 <footer class="bg-white border-t border-orange-100">
@@ -706,6 +743,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 </script>
+
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
+
+document.querySelectorAll("#mobileMenu a").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
+  });
+});
+
+</script>
+
+
 
 </body>
 </html>
