@@ -76,12 +76,16 @@
     <a href="#loyalty" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
       ⭐ Tích điểm
     </a>
-    <a href="#about" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
-      👤 Giới thiệu
-    </a>
-    <a href="#contact" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
-      📞 Liên hệ
-    </a>
+   <button onclick="openAboutModal()"
+  class="block w-full text-left px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
+  👤 Giới thiệu
+</button>
+
+   <button onclick="openContactSheet()"
+  class="block w-full text-left px-4 py-2 font-medium hover:bg-gray-100">
+  📞 Liên hệ
+</button>
+
   </div>
 </div>
 <!-- END MENU TOGGLE -->
@@ -459,7 +463,8 @@
         <!-- Sauce -->
         <div class="mt-6">
           <div class="flex items-center justify-between">
-            <label class="text-sm font-bold"> Chọn nước chấm (có thể chọn nhiều)</label>
+            <label class="text-sm font-bold"> Chọn nước chấm</label>
+
             <span class="text-xs text-slate-500">Nếu không chọn: shop để mặc định</span>
           </div>
 
@@ -495,6 +500,10 @@
                 <div class="text-xs text-slate-500">Đậm đà – thơm tỏi</div>
               </div>
             </label>
+                    <p id="sauceCounter"
+  class="text-sm text-slate-500 mb-2 md:hidden">
+  Đã chọn 0 / 2
+</p>
           </div>
         </div>
 
@@ -778,6 +787,166 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileMenu.classList.add("hidden");
     }
   });
+</script>
+            <!-- ABOUT MODAL GIỚI THIỆUd --> 
+<div id="aboutModal"
+  class="fixed inset-0 z-[9999] hidden bg-black/50 flex items-center justify-center px-4">
+
+  <div class="bg-white w-full max-w-md rounded-3xl p-6 shadow-xl relative">
+    <button onclick="closeAboutModal()"
+      class="absolute top-3 right-3 text-xl font-bold text-slate-500">✕</button>
+
+    <h3 class="text-xl font-extrabold mb-3">👤 Giới thiệu</h3>
+
+    <p class="text-sm text-slate-700 leading-relaxed">
+      Xiên Sạch Online Xin Chào Mọi Người
+      <br><br>
+      Quán chuyên các món xiên que ăn vặt được chế biến theo tiêu chí ngon – sạch – an tâm. Nguyên liệu được chọn lọc kỹ, tẩm ướp vừa miệng, chiên hoặc nướng nóng hổi trong ngày, kết hợp cùng các loại sốt nhà làm đậm đà. Thực đơn đa dạng và có sẵn combo 10 – 20 – 30 xiên phù hợp cho 1 người, nhóm bạn hoặc gia đình, một số combo còn tặng kèm nước uống. Quán luôn chú trọng chất lượng từ chế biến đến đóng gói để mỗi phần xiên đến tay khách đều nóng, ngon và trọn vị.
+    </p>
+  </div>
+</div>
+
+<script>
+function openAboutModal() {
+  document.getElementById("aboutModal").classList.remove("hidden");
+  document.getElementById("mobileMenu").classList.add("hidden");
+}
+
+function closeAboutModal() {
+  document.getElementById("aboutModal").classList.add("hidden");
+}
+</script>
+
+<!-- CONTACT SHEET (MOBILE) -->
+<div id="contactSheet"
+  onclick="closeContactSheet()"
+  class="fixed inset-0 z-[9999] hidden bg-black/50 md:hidden
+         flex items-end">
+
+  <!-- Sheet -->
+  <div id="contactPanel"
+    onclick="event.stopPropagation()"
+    class="w-full bg-white rounded-t-3xl p-6
+           transform translate-y-full
+           transition-transform duration-300 ease-out">
+
+    <h3 class="text-lg font-extrabold mb-4">📞 Liên hệ nhanh</h3>
+
+    <a href="tel:0347599605"
+      class="block mb-3 bg-green-500 text-white text-center font-extrabold py-3 rounded-2xl">
+      📞 Gọi ngay
+    </a>
+
+    <a href="https://zalo.me/0347599605"
+      class="block mb-3 bg-blue-500 text-white text-center font-extrabold py-3 rounded-2xl">
+      💬 Nhắn Zalo
+    </a>
+
+    <button onclick="copyPhone()"
+      class="w-full bg-slate-100 font-bold py-3 rounded-2xl">
+      📋 Sao chép số
+    </button>
+
+  </div>
+</div>
+
+<script>
+function openContactSheet() {
+  const sheet = document.getElementById("contactSheet");
+  const panel = document.getElementById("contactPanel");
+
+  if (!sheet || !panel) return;
+
+  sheet.classList.remove("hidden");
+  setTimeout(() => {
+    panel.classList.remove("translate-y-full");
+  }, 10);
+}
+
+function closeContactSheet() {
+  const sheet = document.getElementById("contactSheet");
+  const panel = document.getElementById("contactPanel");
+
+  panel.classList.add("translate-y-full");
+  setTimeout(() => {
+    sheet.classList.add("hidden");
+  }, 300);
+}
+</script>
+
+
+<!-- TOAST SAUCE LIMIT -->
+<div id="sauceToast"
+  class="fixed bottom-6 left-1/2 -translate-x-1/2
+         bg-black text-white text-sm px-4 py-2 rounded-full
+         opacity-0 pointer-events-none
+         transition-all duration-300
+         md:hidden z-[9999]">
+  ⚠️ Chỉ được chọn tối đa 2 nước chấm
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const MAX = 2;
+  const checkboxes = document.querySelectorAll(
+    'input[name="sauce_option"]'
+  );
+  const toast = document.getElementById("sauceToast");
+  const counter = document.getElementById("sauceCounter");
+
+  function vibrate() {
+    if (navigator.vibrate) {
+      navigator.vibrate(30);
+    }
+  }
+
+  function showToast() {
+    toast.classList.remove("opacity-0");
+    toast.classList.add("opacity-100");
+
+    setTimeout(() => {
+      toast.classList.remove("opacity-100");
+      toast.classList.add("opacity-0");
+    }, 1500);
+  }
+
+  function updateUI() {
+    const checked = document.querySelectorAll(
+      'input[name="sauce_option"]:checked'
+    );
+
+    // cập nhật counter
+    if (counter) {
+      counter.textContent = `Đã chọn ${checked.length} / ${MAX}`;
+    }
+
+    // đủ 2 → khóa cái còn lại
+    if (checked.length >= MAX) {
+      checkboxes.forEach(cb => {
+        if (!cb.checked) cb.disabled = true;
+      });
+    } else {
+      checkboxes.forEach(cb => cb.disabled = false);
+    }
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener("change", () => {
+      const checked = document.querySelectorAll(
+        'input[name="sauce_option"]:checked'
+      );
+
+      if (checked.length > MAX) {
+        cb.checked = false;
+        showToast();
+        vibrate();
+      }
+
+      updateUI();
+    });
+  });
+
+  updateUI(); // init
+});
 </script>
 
 
