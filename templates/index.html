@@ -14,7 +14,8 @@
 
 <!-- === THÔNG BÁO CHÀO MỪNG === -->
 <div id="welcomeModal"
-     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+     class="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 px-4">
+
 
   <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl p-6 text-center">
     <div class="text-3xl mb-3">🍢Xiên Sạch Online Xin Chào</div>
@@ -51,10 +52,11 @@
 <!-- HEADER -->
 <header
   id="mainHeader"
-  class="bg-orange-500 md:static sticky top-0 z-50">
+  class="bg-orange-500 sticky top-0 z-40 md:static">
 
-  <div class="max-w-6xl mx-auto px-4 py-6">
-    <div class="relative flex items-center gap-4">
+
+  <div class="max-w-6xl mx-auto px-4 py-3 md:py-6">
+    <div class="flex items-center gap-3">
 
 
 <!-- START MENU TOGGLE -->
@@ -63,7 +65,7 @@
 
   <div
   id="mobileMenu"
-  class="hidden absolute left-0 mt-2 w-44 bg-white rounded-xl shadow-xl border text-sm overflow-hidden z-[9999]]"
+  class="hidden absolute left-0 mt-2 w-44 bg-white rounded-xl shadow-xl border text-sm overflow-hidden z-[9999]"
 >
     <a href="#top" class="block px-4 py-2 text-gray-900 font-medium hover:bg-gray-100">
       🏠 Trang chủ
@@ -86,14 +88,22 @@
 
 
 
- <div class="absolute left-1/2 -translate-x-1/2 text-center md:static md:translate-x-0 md:text-left">
-  <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+<div class="flex-1 text-center md:text-left">
+  <h1
+    class="text-lg md:text-3xl
+           font-extrabold tracking-tight
+           text-white
+           leading-tight
+           whitespace-nowrap">
     XIÊN SẠCH ONLINE
   </h1>
+
   <p class="hidden md:block text-sm text-white">
     Xiên que sạch – nguyên liệu rõ nguồn – sốt ngon, ăn là ghiền
   </p>
 </div>
+
+
 
 
       <a href="#combo"
@@ -116,7 +126,8 @@
 </header>
 
 <!-- MAIN -->
-<main class="max-w-6xl mx-auto px-4 py-10">
+<main div class="max-w-6xl mx-auto px-4 py-3 md:py-6">
+
 
   <!-- HERO -->
   <section class="bg-white rounded-3xl shadow-lg p-6 md:p-8 mb-10">
@@ -173,8 +184,7 @@
       <!-- Combo Card 1 -->
       <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
         <img class="h-44 w-full object-cover"
-             src="https://sf-static.upanhlaylink.com/img/image_202512257bcb6e89b6bdec91e33e18efcdf5a0c6.jpg" alt="e35ee834-3a52-471f-a4f0-bbbcbcbc0f7f.png"
-             alt="Combo Cá Nhân">
+             src="https://sf-static.upanhlaylink.com/img/image_202512257bcb6e89b6bdec91e33e18efcdf5a0c6.jpg" alt="Combo Cá Nhân">
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
@@ -214,8 +224,7 @@
       <!-- Combo Card 2 (Best seller) -->
       <div class="bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-orange-400">
         <img class="h-44 w-full object-cover"
-             src="https://sf-static.upanhlaylink.com/img/image_20251225c401d74efc55b813ef813c9f2d5cc8c7.jpg" alt="dae6ef9c-09fb-4a33-a587-70967e99341a.png"
-             alt="Combo Gia Đình">
+             src="https://sf-static.upanhlaylink.com/img/image_20251225c401d74efc55b813ef813c9f2d5cc8c7.jpg" alt="Combo Gia Đình">
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
@@ -255,8 +264,7 @@
       <!-- Combo Card 3 -->
       <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
         <img class="h-44 w-full object-cover"
-             src="https://sf-static.upanhlaylink.com/img/image_20251225a98ca73de84a174f57afe1df5161f61f.jpg" alt="6fdf5e49-85d1-42bd-8bec-62bf52f1afab.png"
-             alt="Combo Tụ Họp">
+             src="https://sf-static.upanhlaylink.com/img/image_20251225a98ca73de84a174f57afe1df5161f61f.jpg"  alt="Combo Tụ Họp">
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
@@ -747,16 +755,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
 
-  menuBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-});
-
-document.querySelectorAll("#mobileMenu a").forEach(link => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
+  // mở / đóng khi bấm nút ☰
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle("hidden");
   });
-});
 
+  // bấm link trong menu → đóng
+  document.querySelectorAll("#mobileMenu a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+    });
+  });
+
+  // 👉 CLICK RA NGOÀI → ĐÓNG MENU
+  document.addEventListener("click", (e) => {
+    if (
+      !mobileMenu.classList.contains("hidden") &&
+      !mobileMenu.contains(e.target) &&
+      !menuBtn.contains(e.target)
+    ) {
+      mobileMenu.classList.add("hidden");
+    }
+  });
 </script>
 
 
