@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giới thiệu – Xiên Sạch Online</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f6f6f6}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:56px;
+  background:#ff7a00;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  z-index:1000;
+}
+.menu-btn{font-size:24px;cursor:pointer}
+.logo{font-weight:bold;font-size:15px}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;
+  top:56px;left:0;right:0;
+  background:#fff;
+  display:none;
+  flex-direction:column;
+  border-bottom:1px solid #ddd;
+  z-index:999;
+}
+.nav a{
+  padding:14px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #eee;
+}
+.nav a:last-child{border-bottom:none}
+.nav.show{display:flex}
+
+/* ===== MAIN ===== */
+.main{
+  padding-top:72px; /* FIX LỖI HEADER ĐÈ */
+  padding:16px;
+  max-width:600px;
+  margin:auto;
+}
+
+/* ===== SECTION ===== */
+.section{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.section h2{
+  color:#ff7a00;
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.section p{
+  font-size:14px;
+  line-height:1.6;
+  color:#444;
+}
+
+.highlight{
+  margin-top:12px;
+  padding:12px;
+  background:#fff7f0;
+  border-left:4px solid #ff7a00;
+  font-size:14px;
+  border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="logo">GIỚI THIỆU</div>
+  <div style="width:24px"></div>
+</header>
+
+<div class="nav" id="navMenu">
+  <a href="/">🏠 Trang chủ</a>
+  <a href="/menu">🍢 Menu</a>
+  <a href="/cart">🛒 Giỏ hàng</a>
+  <a href="/program">🎁 Chương trình</a>
+  <a href="/about">ℹ️ Giới thiệu</a>
+  <a href="/contact">📞 Liên hệ</a>
+</div>
+
+<div class="main">
+
+  <div class="section">
+    <h2>🍢 Xiên Sạch Online</h2>
+    <p>
+      Xiên Sạch Online được tạo ra với mong muốn mang đến
+      những món xiên nướng <b>ngon – sạch – an toàn</b> cho mọi người.
+      Tất cả nguyên liệu đều được chọn lọc kỹ lưỡng và chế biến trong ngày.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>🔥 Cam kết của chúng tôi</h2>
+    <p>
+      • Không bán đồ qua ngày<br>
+      • Sốt tách riêng, đảm bảo vệ sinh<br>
+      • Chế biến sau khi nhận đơn<br>
+      • Giao nhanh trong 20–40 phút
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>💚 Vì sao chọn Xiên Sạch?</h2>
+    <p>
+      Chúng tôi không chỉ bán đồ ăn, mà còn bán <b>sự yên tâm</b>.
+      Mỗi đơn hàng đều được chuẩn bị như cho chính gia đình mình.
+    </p>
+    <div class="highlight">
+      📞 Có góp ý hay thắc mắc? Đừng ngại liên hệ với chúng tôi!
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("show");
+}
+document.addEventListener("click",e=>{
+  if(!e.target.closest("header") && !e.target.closest(".nav")){
+    document.getElementById("navMenu").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>

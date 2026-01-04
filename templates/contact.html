@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liên hệ – Xiên Sạch Online</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f6f6f6}
+
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:#ff7a00;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;z-index:1000;
+}
+.menu-btn{font-size:24px;cursor:pointer}
+.logo{font-weight:bold;font-size:15px}
+
+/* NAV */
+.nav{
+  position:fixed;top:56px;left:0;right:0;
+  background:#fff;display:none;flex-direction:column;
+  border-bottom:1px solid #ddd;z-index:999;
+}
+.nav a{
+  padding:14px;text-decoration:none;color:#333;
+  border-bottom:1px solid #eee;
+}
+.nav.show{display:flex}
+
+/* MAIN */
+.main{padding-top:70px;padding:15px}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+.card h2{color:#ff7a00;font-size:18px;margin-bottom:12px}
+
+/* INFO */
+.info p{font-size:14px;margin-bottom:6px}
+
+/* QUICK */
+.quick{display:flex;gap:10px;margin-top:10px}
+.quick a{
+  flex:1;text-align:center;padding:12px;
+  border-radius:12px;color:#fff;
+  font-weight:bold;text-decoration:none;font-size:14px;
+}
+.zalo{background:#0180ff}
+.fb{background:#1877f2}
+.call{background:#28a745}
+
+/* REVIEW BTN */
+.review-btn{
+  width:100%;padding:14px;
+  background:#ff7a00;color:#fff;
+  border:none;border-radius:14px;
+  font-size:16px;font-weight:bold;
+}
+
+/* REVIEWS */
+.review{border-bottom:1px dashed #eee;padding:12px 0}
+.stars{color:#f5b301;font-size:14px}
+.phone{color:#888;font-size:13px}
+.comment{font-size:14px;margin-top:4px}
+
+/* POPUP */
+.overlay{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.5);
+  display:none;align-items:center;justify-content:center;
+  z-index:2000;
+}
+.popup{
+  background:#fff;width:90%;
+  border-radius:14px;padding:16px;
+}
+.popup h3{text-align:center;margin-bottom:12px}
+.popup input,.popup textarea{
+  width:100%;padding:10px;margin-bottom:10px;
+  border-radius:10px;border:1px solid #ccc;
+}
+.popup button{
+  width:100%;padding:12px;
+  background:#28a745;color:#fff;
+  border:none;border-radius:12px;
+  font-size:16px;
+}
+.close{text-align:center;color:red;margin-top:8px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="logo">LIÊN HỆ</div>
+  <div></div>
+</header>
+
+<div class="nav" id="navMenu">
+  <a href="/">🏠 Trang chủ</a>
+  <a href="/menu">🍢 Menu</a>
+  <a href="/cart">🛒 Giỏ hàng</a>
+  <a href="/program">🎁 Chương trình</a>
+  <a href="/about">ℹ️ Giới thiệu</a>
+  <a href="/contact">📞 Liên hệ</a>
+</div>
+
+<div class="main">
+
+  <div class="card info">
+    <h2>📍 Xiên Sạch Online</h2>
+    <p>📞 0987 654 321</p>
+    <p>⏰ 15:00 – 22:00</p>
+    <p>🚚 Giao 20–40 phút</p>
+
+    <div class="quick">
+      <a class="zalo" href="https://zalo.me/0987654321" target="_blank">Zalo</a>
+      <a class="fb" href="https://facebook.com" target="_blank">Facebook</a>
+      <a class="call" href="tel:0987654321">Gọi</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="review-btn" onclick="openReview()">⭐ ĐÁNH GIÁ CỬA HÀNG</button>
+  </div>
+
+  <div class="card">
+    <h2>⭐ Đánh giá khách hàng</h2>
+
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><div class="phone">039****123</div><div class="comment">Xiên ngon sạch sẽ 👍</div></div>
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><div class="phone">086****456</div><div class="comment">Combo nhiều, ăn đã</div></div>
+    <div class="review"><div class="stars">⭐⭐⭐⭐</div><div class="phone">091****789</div><div class="comment">Giao nhanh, ổn áp</div></div>
+    <div class="review"><div class="stars">⭐⭐⭐⭐⭐</div><div class="phone">070****222</div><div class="comment">Sẽ ủng hộ dài lâu</div></div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="overlay" id="popup">
+  <div class="popup">
+    <h3>⭐ Gửi đánh giá</h3>
+    <input id="name" placeholder="Họ và tên">
+    <input id="phone" placeholder="Số điện thoại (10 số)">
+    <textarea id="content" placeholder="Cảm nhận của bạn"></textarea>
+    <button onclick="submitReview()">Gửi đánh giá</button>
+    <div class="close" onclick="closeReview()">Đóng</div>
+  </div>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("show");
+}
+document.addEventListener("click",e=>{
+  if(!e.target.closest("header")&&!e.target.closest(".nav")){
+    document.getElementById("navMenu").classList.remove("show");
+  }
+});
+
+function openReview(){document.getElementById("popup").style.display="flex"}
+function closeReview(){document.getElementById("popup").style.display="none"}
+
+function submitReview(){
+  let name=nameInput=name=document.getElementById("name").value.trim();
+  let phone=document.getElementById("phone").value.trim();
+  let content=document.getElementById("content").value.trim();
+
+  if(!name||!content||!/^[0-9]{10}$/.test(phone)){
+    alert("⚠️ Vui lòng nhập HỌ TÊN + SĐT 10 SỐ + NỘI DUNG");
+    return;
+  }
+  alert("✅ Đã gửi đánh giá (bản test)");
+  closeReview();
+}
+</script>
+
+</body>
+</html>

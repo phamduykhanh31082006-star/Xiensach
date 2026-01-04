@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giỏ hàng | Xiên Sạch Online</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f6f6f6}
+
+/* ===== HEADER ===== */
+header{
+  background:#ff7a00;
+  color:#fff;
+  padding:12px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.left{display:flex;align-items:center;gap:12px}
+.menu-btn{font-size:22px;cursor:pointer}
+.logo{font-weight:bold}
+
+.cart-icon{
+  position:relative;
+  cursor:pointer;
+}
+.cart-icon span{
+  position:absolute;
+  top:-6px;right:-8px;
+  background:#e74c3c;
+  color:#fff;
+  font-size:11px;
+  padding:2px 6px;
+  border-radius:999px;
+}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;
+  top:56px;left:0;right:0;
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  display:none;
+  z-index:1500;
+}
+.nav a{
+  display:block;
+  padding:12px 16px;
+  text-decoration:none;
+  color:#333;
+  border-bottom:1px solid #eee;
+}
+.nav.show{display:block}
+
+.overlay{
+  position:fixed;inset:0;
+  background:transparent;
+  display:none;
+  z-index:1400;
+}
+.overlay.show{display:block}
+
+/* ===== MAIN ===== */
+.main{
+  padding:16px;
+  max-width:600px;
+  margin:auto;
+}
+
+/* ===== EMPTY ===== */
+.empty{
+  background:#fff;
+  border-radius:16px;
+  padding:28px;
+  text-align:center;
+}
+.empty button{
+  margin-top:16px;
+  padding:12px 20px;
+  border:none;
+  border-radius:999px;
+  background:#ff7a00;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* ===== ITEM ===== */
+.item{
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+}
+.item-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty button{
+  width:28px;height:28px;
+  border:none;border-radius:6px;
+  background:#ff7a00;color:#fff;
+}
+.qty .del{background:#e74c3c}
+
+/* ===== TOTAL ===== */
+.total-box{
+  background:#fff;
+  border-radius:18px;
+  padding:16px;
+  margin-top:16px;
+}
+.total-line{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  color:#ff7a00;
+}
+.note-60k{
+  font-size:12px;
+  color:#777;
+  margin-top:6px;
+}
+.order-btn{
+  margin-top:14px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:18px;
+  background:#ff7a00;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+}
+
+/* ===== POPUP ===== */
+.popup{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+.popup.show{display:flex}
+.popup-box{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  width:90%;
+  max-width:360px;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;right:12px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* SAUCE */
+.sauce-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:14px 0;
+}
+.sauce{
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:999px;
+  text-align:center;
+  cursor:pointer;
+}
+.sauce.active{
+  border-color:#ff7a00;
+  background:#fff7f0;
+}
+
+/* FORM */
+input,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="left">
+    <div class="menu-btn" onclick="toggleNav()">☰</div>
+    <div class="logo">GIỎ HÀNG</div>
+  </div>
+  <div class="cart-icon" onclick="location.href='/cart'">
+    🛒 <span id="cartCount">0</span>
+  </div>
+</header>
+
+<div class="nav" id="nav">
+  <a href="/">🏠 Trang chủ</a>
+  <a href="/menu">🍢 Menu</a>
+  <a href="/cart">🛒 Giỏ hàng</a>
+  <a href="/program">🎁 Chương trình</a>
+  <a href="/about">ℹ️ Giới thiệu</a>
+  <a href="/contact">📞 Liên hệ</a>
+</div>
+<div class="overlay" id="overlay" onclick="closeNav()"></div>
+
+<div class="main" id="app"></div>
+
+<!-- POPUP SAUCE -->
+<div class="popup" id="saucePopup">
+  <div class="popup-box">
+    <span class="close" onclick="closeSauce()">✕</span>
+    <b>Chọn nước chấm (tối đa 2)</b>
+    <div class="sauce-grid">
+      <div class="sauce" onclick="toggleSauce(this)">Tương ớt</div>
+      <div class="sauce" onclick="toggleSauce(this)">Tương cà</div>
+      <div class="sauce" onclick="toggleSauce(this)">Sốt me</div>
+      <div class="sauce" onclick="toggleSauce(this)">Sa tế</div>
+    </div>
+    <button class="order-btn" onclick="openForm()">Tiếp tục</button>
+  </div>
+</div>
+
+<!-- POPUP FORM -->
+<div class="popup" id="formPopup">
+  <div class="popup-box">
+    <span class="close" onclick="closeForm()">✕</span>
+
+    <form method="POST" action="/place-order" onsubmit="return prepareSubmit()">
+      <input name="name" placeholder="Họ tên *" required>
+      <input name="phone" placeholder="Số điện thoại *" required>
+      <input name="address" placeholder="Địa chỉ *" required>
+      <textarea name="note" placeholder="Ghi chú"></textarea>
+
+      <input type="hidden" name="cart_text" id="cart_text">
+      <input type="hidden" name="sauce_text" id="sauce_text">
+      <input type="hidden" name="total" id="total">
+
+      <button class="order-btn" type="submit">ĐẶT HÀNG</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const app=document.getElementById("app");
+let sauces=[], total=0;
+
+/* NAV */
+function toggleNav(){
+  nav.classList.toggle("show");
+  overlay.classList.toggle("show");
+}
+function closeNav(){
+  nav.classList.remove("show");
+  overlay.classList.remove("show");
+}
+
+/* CART */
+function getCart(){
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+function updateCartCount(){
+  document.getElementById("cartCount").innerText = getCart().length;
+}
+
+function render(){
+  const cart=getCart();
+  updateCartCount();
+
+  if(!cart.length){
+    app.innerHTML=`
+      <div class="empty">
+        <h3>Giỏ hàng trống</h3>
+        <button onclick="location.href='/menu'">Quay lại menu</button>
+      </div>`;
+    return;
+  }
+
+  total=0;
+  let html="";
+  cart.forEach((i,idx)=>{
+    total+=i.price*i.qty;
+    html+=`
+    <div class="item">
+      <div class="item-top">
+        <b>${i.name}</b>
+        <span>${(i.price*i.qty).toLocaleString()}đ</span>
+      </div>
+      <div class="qty">
+        <button onclick="chg(${idx},-1)">-</button>
+        ${i.qty}
+        <button onclick="chg(${idx},1)">+</button>
+        <button class="del" onclick="del(${idx})">❌</button>
+      </div>
+    </div>`;
+  });
+
+  html+=`
+  <div class="total-box">
+    <div class="total-line">
+      <span>Tổng cộng</span>
+      <span>${total.toLocaleString()}đ</span>
+    </div>
+    <div class="note-60k">* Xiên lẻ tự chọn: đơn tối thiểu 60.000đ</div>
+    <button class="order-btn" onclick="openSauce()">ĐẶT HÀNG</button>
+  </div>`;
+  app.innerHTML=html;
+}
+
+function chg(i,d){
+  const c=getCart();
+  c[i].qty+=d;
+  if(c[i].qty<=0)c.splice(i,1);
+  localStorage.setItem("cart",JSON.stringify(c));
+  render();
+}
+function del(i){
+  const c=getCart();c.splice(i,1);
+  localStorage.setItem("cart",JSON.stringify(c));
+  render();
+}
+
+/* POPUP */
+function openSauce(){
+  if(total < 60000){
+    alert("Đơn xiên lẻ cần tối thiểu 60.000đ");
+    return;
+  }
+  sauces=[];
+  document.querySelectorAll(".sauce").forEach(s=>s.classList.remove("active"));
+  saucePopup.classList.add("show");
+}
+function closeSauce(){ saucePopup.classList.remove("show"); }
+function toggleSauce(el){
+  if(el.classList.contains("active")){
+    el.classList.remove("active");
+    sauces=sauces.filter(s=>s!==el.innerText);
+  }else{
+    if(sauces.length>=2)return;
+    el.classList.add("active");
+    sauces.push(el.innerText);
+  }
+}
+function openForm(){
+  closeSauce();
+  formPopup.classList.add("show");
+}
+function closeForm(){ formPopup.classList.remove("show"); }
+
+/* SUBMIT */
+function prepareSubmit(){
+  const cart=getCart();
+  cart_text.value = cart.map(i=>`${i.name} x${i.qty}`).join("; ");
+  sauce_text.value = sauces.join(", ");
+  document.getElementById("total").value = total;
+  return true; // KHÔNG xóa cart ở đây
+}
+
+render();
+</script>
+
+</body>
+</html>

@@ -1,132 +1,134 @@
-from flask import Flask, render_template, request
-from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime, timedelta, timezone
+import uuid
 import requests
-import time
 
 app = Flask(__name__)
 
-# =========================
-# CONFIG – CHỈ CẦN ĐỔI 3 DÒNG NÀY
-# =========================
-GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmccd1loBWTUn__34eUaxBco5PUeFaayvplswexCPEHyiXcvUM0liws9JJsnwAb6I/exec"
+# ===== CONFIG =====
+VIETNAM_TZ = timezone(timedelta(hours=7))
+SPAM_LIMIT_MINUTES = 5   # khi test có thể để = 0
+order_cache = {}
+
+GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb9XhVyTbU8uJ_KpVSfBrpmOjwa4U62Ncah_uIrlejF00Dv1zrf87RYcu1OrfmVhEPew/exec"
+
 TELEGRAM_BOT_TOKEN = "8338747162:AAFnIT2NHXD0ha--Mp5ZsCvMNHr7pDIYxyg"
 TELEGRAM_CHAT_ID = "6285097453"
 
-ORDER_LIMIT_SECONDS = 180  # 3 phút
-order_cache = {}
-
-# =========================
-# TRANG CHỦ
-# =========================
-@app.route("/", methods=["GET"])
-def home():
+# ===== ROUTES CƠ BẢN =====
+@app.route("/")
+def index():
     return render_template("index.html")
 
-# =========================
-# XỬ LÝ ĐẶT HÀNG
-# =========================
-@app.route("/order", methods=["POST"])
-def order():
-    # ========= CHỐNG SPAM – HONEYPOT =========
-    if request.form.get("website"):
-        return "Spam detected", 400
+@app.route("/menu")
+def menu():
+    return render_template("menu.html")
 
-    # ========= GIỚI HẠN 1 ĐƠN / 3 PHÚT =========
-    phone = request.form.get("phone")
-    now_ts = time.time()
-    last_time = order_cache.get(phone)
+@app.route("/cart")
+def cart():
+    return render_template("cart.html")
 
-    if last_time and now_ts - last_time < ORDER_LIMIT_SECONDS:
-        return """
-        <h2>⚠️ Bạn đặt đơn quá nhanh</h2>
-        <p>Vui lòng chờ vài phút rồi thử lại.</p>
-        """
+@app.route("/program")
+def program():
+    return render_template("program.html")
 
-    order_cache[phone] = now_ts
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
-    # ========= THÔNG TIN KHÁCH =========
-    name = request.form.get("name")
-    address = request.form.get("address")
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
-    # ========= THÔNG TIN ĐƠN =========
-    combo = request.form.get("combo")
-    price = request.form.get("price")
-    sauce = request.form.get("sauce")
-    spicy = request.form.get("spicy")
-    note = request.form.get("note")
+# ===== SUCCESS =====
+@app.route("/success")
+def success():
+    order_id = request.args.get("order_id")
+    if not order_id:
+        return redirect("/")
+    return render_template("success.html", order_id=order_id)
 
-    drink = request.form.get("drink")
-    tobacco = request.form.get("tobacco")
-    total = request.form.get("total")
+# ===== PLACE ORDER (FORM THUẦN – ĐÃ FIX) =====
+@app.route("/place-order", methods=["POST"])
+def place_order():
+    name = request.form.get("name", "").strip()
+    phone = request.form.get("phone", "").strip()
+    address = request.form.get("address", "").strip()
+    note = request.form.get("note", "").strip()
+    cart_text = request.form.get("cart_text", "").strip()
+    sauce_text = request.form.get("sauce_text", "").strip()
+    total = request.form.get("total", "").strip()
 
-    # ========= THỜI GIAN VN =========
-    time_now = datetime.now(
-        ZoneInfo("Asia/Ho_Chi_Minh")
-    ).strftime("%d/%m/%Y %H:%M:%S")
+    # ===== VALIDATE CƠ BẢN =====
+    if not name or not phone or not address or not cart_text:
+        return redirect(url_for("cart"))
 
-    # ========= GỬI GOOGLE SHEET =========
-    data = {
-        "time": time_now,
-        "name": name,
-        "phone": phone,
-        "address": address,
-        "combo": combo,
-        "price": price,
-        "sauce": sauce,
-        "spicy": spicy,
-        "drink": drink,
-        "tobacco": tobacco,
-        "total": total,
-        "note": note
-    }
+    now = datetime.now(VIETNAM_TZ)
 
-    try:
-        requests.post(GOOGLE_SCRIPT_URL, json=data, timeout=10)
-    except:
-        pass
+    # ===== CHỐNG SPAM (CHỈ CHẶN TRƯỚC KHI GHI ĐƠN) =====
+    last = order_cache.get(phone)
+    if last and now - last < timedelta(minutes=SPAM_LIMIT_MINUTES):
+        # KHÔNG ghi đơn → quay lại cart
+        return redirect(url_for("cart"))
 
-    # ========= GỬI TELEGRAM =========
-    telegram_msg = f"""
-🧾 ĐƠN HÀNG MỚI
-⏰ {time_now}
+    # đánh dấu thời điểm đặt
+    order_cache[phone] = now
+    order_id = f"XS-{now.strftime('%Y%m%d')}-{uuid.uuid4().hex[:6].upper()}"
 
-👤 {name}
-📞 {phone}
-📍 {address}
-
-🍢 Combo: {combo}
-🥫 Sốt: {sauce}
-🌶 Cay: {spicy}
-🥤 Nước: {drink}
-🚬 Thuốc: {tobacco}
-
-💰 Tổng tiền: {total}đ
-📝 Ghi chú: {note}
-"""
-
+    # ===== GHI GOOGLE SHEET (QUAN TRỌNG NHẤT) =====
     try:
         requests.post(
-            f"https://api.telegram.org/bot8338747162:AAFnIT2NHXD0ha--Mp5ZsCvMNHr7pDIYxyg/sendMessage",
+            GOOGLE_SCRIPT_URL,
             json={
-                "chat_id": 6285097453,
-                "text": telegram_msg
+                "order_id": order_id,
+                "time": now.strftime("%d/%m/%Y %H:%M:%S"),
+                "name": name,
+                "phone": phone,
+                "address": address,
+                "items": cart_text,
+                "sauces": sauce_text,
+                "total": total,
+                "note": note
             },
-            timeout=5
+            timeout=10
+        ).raise_for_status()
+    except Exception as e:
+        print("Google Sheet error:", e)
+        # CHƯA GHI ĐƠN → KHÔNG CHO QUA SUCCESS
+        return redirect(url_for("cart"))
+
+    # ===== TELEGRAM (LỖI KHÔNG ẢNH HƯỞNG SUCCESS) =====
+    try:
+        msg = f"""🛎️ ĐƠN MỚI
+Mã: {order_id}
+
+👤 Tên Khách: {name}
+📞 SĐT: {phone}
+📍 Đ/C: {address}
+
+🍢 Món: {cart_text}
+
+🥣 Nước chấm: {sauce_text}
+
+💰 Tổng: {total}
+📝 Ghi chú: {note}
+"""
+        requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
+            json={
+                "chat_id": TELEGRAM_CHAT_ID,
+                "text": msg
+            },
+            timeout=10
         )
-    except:
-        pass
+    except Exception as e:
+        print("Telegram error (bỏ qua):", e)
+        # ❗ KHÔNG redirect về cart nữa
 
-    # ========= TRANG THÀNH CÔNG =========
-    return render_template(
-        "success.html",
-        name=name,
-        phone=phone,
-        total=total
-    )
+    # ===== ĐÃ GHI ĐƠN → LUÔN SANG SUCCESS =====
+    return redirect(url_for("success", order_id=order_id, total=total))
 
-# =========================
-# CHẠY LOCAL / RENDER
-# =========================
+
+# ===== RUN =====
 if __name__ == "__main__":
     app.run(debug=True)

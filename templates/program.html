@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chương trình – Xiên Sạch Online</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f6f6f6}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:#ff7a00;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;z-index:1000;
+}
+.menu-btn{font-size:24px;cursor:pointer}
+.logo{font-weight:bold;font-size:15px}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;top:56px;left:0;right:0;
+  background:#fff;display:none;flex-direction:column;
+  border-bottom:1px solid #ddd;z-index:999;
+}
+.nav a{
+  padding:14px;text-decoration:none;color:#333;
+  border-bottom:1px solid #eee;
+}
+.nav.show{display:flex}
+
+/* ===== MAIN ===== */
+.main{
+  padding-top:76px;
+  padding-left:15px;
+  padding-right:15px;
+  padding-bottom:30px;
+  max-width:600px;
+  margin:auto;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* ===== POINT CARD ===== */
+.point-card{
+  background:linear-gradient(135deg,#ff8c1a,#ff6a00);
+  color:#fff;
+  border-radius:18px;
+  padding:18px;
+}
+.point-card h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+.stars{
+  color:#ffd700;
+  font-size:16px;
+  margin-bottom:12px;
+}
+.point-card ul{
+  font-size:14px;
+  line-height:1.6;
+}
+.point-card li{margin-bottom:6px}
+
+/* ===== REWARD ===== */
+.reward-title{
+  font-size:18px;
+  color:#ff7a00;
+  margin-bottom:12px;
+}
+.reward{
+  border:2px dashed #ffb26a;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.reward span{
+  font-size:15px;
+  font-weight:bold;
+}
+.reward .btn{
+  background:#28a745;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+}
+
+/* ===== NOTE ===== */
+.note h3{
+  font-size:17px;
+  color:#ff7a00;
+  margin-bottom:10px;
+}
+.note ul{
+  font-size:14px;
+  line-height:1.6;
+}
+.note li{margin-bottom:6px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="logo">CHƯƠNG TRÌNH</div>
+  <div>🎁</div>
+</header>
+
+<div class="nav" id="navMenu">
+  <a href="/">🏠 Trang chủ</a>
+  <a href="/menu">🍢 Menu</a>
+  <a href="/cart">🛒 Giỏ hàng</a>
+  <a href="/program">🎁 Chương trình</a>
+  <a href="/about">ℹ️ Giới thiệu</a>
+  <a href="/contact">📞 Liên hệ</a>
+</div>
+
+<div class="main">
+
+  <!-- THẺ TÍCH ĐIỂM -->
+  <div class="card point-card">
+    <h2>💳 Thẻ tích điểm Xiên Sạch</h2>
+    <div class="stars">★★★★★</div>
+    <ul>
+      <li>🍢 Mỗi <b>đơn Combo = 1 điểm</b></li>
+      <li>💰 Đặt lẻ <b>từ 100.000đ = 1 điểm</b></li>
+      <li>📞 Điểm lưu theo <b>SĐT & Họ tên</b></li>
+    </ul>
+  </div>
+
+  <!-- ĐỔI QUÀ -->
+  <div class="card">
+    <div class="reward-title">🎁 Đổi điểm nhận quà</div>
+
+    <div class="reward">
+      <span>🎟️ 10 điểm</span>
+      <div class="btn">Voucher -50%</div>
+    </div>
+
+    <div class="reward">
+      <span>🧸 20 điểm</span>
+      <div class="btn">Tặng gấu bông</div>
+    </div>
+
+    <div class="reward">
+      <span>🍢 30 điểm</span>
+      <div class="btn">Combo FREE</div>
+    </div>
+  </div>
+
+  <!-- LƯU Ý -->
+  <div class="card note">
+    <h3>📌 Lưu ý quan trọng</h3>
+    <ul>
+      <li>🔁 Mỗi lần đổi quà, <b>điểm sẽ reset về 0</b></li>
+      <li>📞 Vui lòng cung cấp đúng <b>số điện thoại</b> khi đặt</li>
+      <li>⏳ Chương trình có thể thay đổi theo thời gian</li>
+      <li>✅ Điểm chỉ được cộng sau khi <b>shop xác nhận đơn</b></li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navMenu").classList.toggle("show");
+}
+document.addEventListener("click",e=>{
+  if(!e.target.closest("header") && !e.target.closest(".nav")){
+    document.getElementById("navMenu").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
