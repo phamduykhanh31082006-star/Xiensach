@@ -41,62 +41,99 @@ header{
   margin:auto;
 }
 
-/* ===== CARD ===== */
+/* ===== CARD BASE ===== */
 .card{
   background:#fff;
-  border-radius:16px;
+  border-radius:14px;
   padding:16px;
   margin-bottom:16px;
   box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-/* ===== POINT CARD ===== */
-.point-card{
-  background:linear-gradient(135deg,#ff8c1a,#ff6a00);
-  color:#fff;
-  border-radius:18px;
-  padding:18px;
+/* ===== STAMP CARD ===== */
+.stamp-card{
+  background:#fff;
+  border:1.5px solid #e0e0e0;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
 }
-.point-card h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
-.stars{
-  color:#ffd700;
-  font-size:16px;
+
+.stamp-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:12px;
 }
-.point-card ul{
+.stamp-title{
+  font-size:16px;
+  font-weight:bold;
+}
+.stamp-sub{
+  font-size:12px;
+  color:#777;
+}
+
+/* STAMP GRID */
+.stamp-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:14px 0;
+}
+
+.stamp{
+  height:38px;
+  border:1.8px solid #d6d6d6;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:14px;
+  color:#aaa;
+  background:#fff;
+}
+
+/* NOTE */
+.stamp-note{
+  font-size:13px;
+  color:#555;
   line-height:1.6;
 }
-.point-card li{margin-bottom:6px}
 
-/* ===== REWARD ===== */
-.reward-title{
+/* ===== REDEEM ===== */
+.redeem-title{
   font-size:18px;
   color:#ff7a00;
   margin-bottom:12px;
 }
-.reward{
-  border:2px dashed #ffb26a;
+
+.redeem{
+  background:#fff;
   border-radius:14px;
-  padding:12px;
+  padding:14px;
   margin-bottom:12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
-.reward span{
-  font-size:15px;
-  font-weight:bold;
+
+.redeem-left{
+  font-size:14px;
 }
-.reward .btn{
-  background:#28a745;
+.redeem-left b{
+  font-size:16px;
+}
+
+.redeem-btn{
+  background:#2ecc71;
   color:#fff;
-  padding:6px 12px;
-  border-radius:20px;
+  padding:8px 16px;
+  border-radius:999px;
   font-size:13px;
+  text-decoration:none;
+  display:inline-block;
 }
 
 /* ===== NOTE ===== */
@@ -133,33 +170,58 @@ header{
 <div class="main">
 
   <!-- THẺ TÍCH ĐIỂM -->
-  <div class="card point-card">
-    <h2>💳 Thẻ tích điểm Xiên Sạch</h2>
-    <div class="stars">★★★★★</div>
-    <ul>
-      <li>🍢 Mỗi <b>đơn Combo = 1 điểm</b></li>
-      <li>💰 Đặt lẻ <b>từ 100.000đ = 1 điểm</b></li>
-      <li>📞 Điểm lưu theo <b>SĐT & Họ tên</b></li>
-    </ul>
+  <div class="stamp-card">
+    <div class="stamp-header">
+      <div class="stamp-title">Thẻ tích điểm Xiên Sạch</div>
+      <div class="stamp-sub">Ăn đủ 10 lần nhận quà</div>
+    </div>
+
+    <div class="stamp-grid">
+      <div class="stamp">1</div>
+      <div class="stamp">2</div>
+      <div class="stamp">3</div>
+      <div class="stamp">4</div>
+      <div class="stamp">5</div>
+      <div class="stamp">6</div>
+      <div class="stamp">7</div>
+      <div class="stamp">8</div>
+      <div class="stamp">9</div>
+      <div class="stamp">10</div>
+    </div>
+
+    <div class="stamp-note">
+      • Mỗi đơn <b>Combo = 1 điểm</b><br>
+      • Đặt lẻ <b>từ 100.000đ = 1 điểm</b><br>
+      • Điểm lưu theo <b>SĐT & Họ tên</b>
+    </div>
   </div>
 
   <!-- ĐỔI QUÀ -->
   <div class="card">
-    <div class="reward-title">🎁 Đổi điểm nhận quà</div>
+    <div class="redeem-title">🎁 Đổi điểm nhận quà</div>
 
-    <div class="reward">
-      <span>🎟️ 10 điểm</span>
-      <div class="btn">Voucher -50%</div>
+    <div class="redeem">
+      <div class="redeem-left">
+        🎟 <b>10 điểm</b><br>
+        Voucher giảm 50%
+      </div>
+      <a href="/menu" class="redeem-btn">Nhận</a>
     </div>
 
-    <div class="reward">
-      <span>🧸 20 điểm</span>
-      <div class="btn">Tặng gấu bông</div>
+    <div class="redeem">
+      <div class="redeem-left">
+        🧸 <b>20 điểm</b><br>
+        Tặng gấu bông
+      </div>
+      <a href="/menu" class="redeem-btn">Nhận</a>
     </div>
 
-    <div class="reward">
-      <span>🍢 30 điểm</span>
-      <div class="btn">Combo FREE</div>
+    <div class="redeem">
+      <div class="redeem-left">
+        🍢 <b>30 điểm</b><br>
+        Combo FREE
+      </div>
+      <a href="/menu" class="redeem-btn">Nhận</a>
     </div>
   </div>
 

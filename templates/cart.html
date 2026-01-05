@@ -231,7 +231,7 @@ input,textarea{
       <div class="sauce" onclick="toggleSauce(this)">Tương ớt</div>
       <div class="sauce" onclick="toggleSauce(this)">Tương cà</div>
       <div class="sauce" onclick="toggleSauce(this)">Sốt me</div>
-      <div class="sauce" onclick="toggleSauce(this)">Sa tế</div>
+      <div class="sauce" onclick="toggleSauce(this)">Tương Chua Ngọt</div>
     </div>
     <button class="order-btn" onclick="openForm()">Tiếp tục</button>
   </div>
@@ -258,8 +258,8 @@ input,textarea{
 </div>
 
 <script>
-const app=document.getElementById("app");
-let sauces=[], total=0;
+const app = document.getElementById("app");
+let sauces = [];
 
 /* NAV */
 function toggleNav(){
@@ -271,20 +271,29 @@ function closeNav(){
   overlay.classList.remove("show");
 }
 
-/* CART */
+/* CART CORE */
 function getCart(){
   return JSON.parse(localStorage.getItem("cart")) || [];
 }
+function saveCart(cart){
+  localStorage.setItem("cart", JSON.stringify(cart));
+  render();
+}
+function getTotalQty(){
+  return getCart().reduce((s,i)=>s+i.qty,0);
+}
 function updateCartCount(){
-  document.getElementById("cartCount").innerText = getCart().length;
+  document.getElementById("cartCount").innerText = getTotalQty();
 }
 
+/* RENDER */
+let total = 0;
 function render(){
-  const cart=getCart();
+  const cart = getCart();
   updateCartCount();
 
   if(!cart.length){
-    app.innerHTML=`
+    app.innerHTML = `
       <div class="empty">
         <h3>Giỏ hàng trống</h3>
         <button onclick="location.href='/menu'">Quay lại menu</button>
@@ -292,11 +301,15 @@ function render(){
     return;
   }
 
-  total=0;
-  let html="";
+  total = 0;
+  let hasXienLe = false;
+  let html = "";
+
   cart.forEach((i,idx)=>{
-    total+=i.price*i.qty;
-    html+=`
+    total += i.price * i.qty;
+    if(i.price <= 12000) hasXienLe = true;
+
+    html += `
     <div class="item">
       <div class="item-top">
         <b>${i.name}</b>
@@ -306,57 +319,61 @@ function render(){
         <button onclick="chg(${idx},-1)">-</button>
         ${i.qty}
         <button onclick="chg(${idx},1)">+</button>
-        <button class="del" onclick="del(${idx})">❌</button>
+        <button class="del" onclick="delItem(${idx})">❌</button>
       </div>
     </div>`;
   });
 
-  html+=`
+  html += `
   <div class="total-box">
     <div class="total-line">
       <span>Tổng cộng</span>
       <span>${total.toLocaleString()}đ</span>
     </div>
-    <div class="note-60k">* Xiên lẻ tự chọn: đơn tối thiểu 60.000đ</div>
-    <button class="order-btn" onclick="openSauce()">ĐẶT HÀNG</button>
+    ${hasXienLe ? `<div class="note-60k">* Xiên lẻ tự chọn: đơn tối thiểu 60.000đ</div>` : ``}
+    <button class="order-btn" onclick="openSauce(${hasXienLe})">ĐẶT HÀNG</button>
   </div>`;
-  app.innerHTML=html;
+
+  app.innerHTML = html;
 }
 
+/* QTY */
 function chg(i,d){
-  const c=getCart();
-  c[i].qty+=d;
-  if(c[i].qty<=0)c.splice(i,1);
-  localStorage.setItem("cart",JSON.stringify(c));
-  render();
+  const c = getCart();
+  c[i].qty += d;
+  if(c[i].qty <= 0) c.splice(i,1);
+  saveCart(c);
 }
-function del(i){
-  const c=getCart();c.splice(i,1);
-  localStorage.setItem("cart",JSON.stringify(c));
-  render();
+function delItem(i){
+  const c = getCart();
+  c.splice(i,1);
+  saveCart(c);
 }
 
-/* POPUP */
-function openSauce(){
-  if(total < 60000){
+/* POPUP SAUCE */
+function openSauce(hasXienLe){
+  if(hasXienLe && total < 60000){
     alert("Đơn xiên lẻ cần tối thiểu 60.000đ");
     return;
   }
-  sauces=[];
+  sauces = [];
   document.querySelectorAll(".sauce").forEach(s=>s.classList.remove("active"));
   saucePopup.classList.add("show");
 }
 function closeSauce(){ saucePopup.classList.remove("show"); }
+
 function toggleSauce(el){
   if(el.classList.contains("active")){
     el.classList.remove("active");
-    sauces=sauces.filter(s=>s!==el.innerText);
+    sauces = sauces.filter(s=>s!==el.innerText);
   }else{
-    if(sauces.length>=2)return;
+    if(sauces.length>=2) return;
     el.classList.add("active");
     sauces.push(el.innerText);
   }
 }
+
+/* FORM */
 function openForm(){
   closeSauce();
   formPopup.classList.add("show");
@@ -365,15 +382,22 @@ function closeForm(){ formPopup.classList.remove("show"); }
 
 /* SUBMIT */
 function prepareSubmit(){
-  const cart=getCart();
+  const cart = getCart();
   cart_text.value = cart.map(i=>`${i.name} x${i.qty}`).join("; ");
   sauce_text.value = sauces.join(", ");
   document.getElementById("total").value = total;
-  return true; // KHÔNG xóa cart ở đây
+
+  // reset cart SAU submit
+  localStorage.removeItem("cart");
+  setTimeout(()=>updateCartCount(),500);
+
+  return true;
 }
 
+/* INIT */
 render();
 </script>
+
 
 </body>
 </html>

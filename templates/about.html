@@ -11,75 +11,157 @@ body{background:#f6f6f6}
 
 /* ===== HEADER ===== */
 header{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:56px;
-  background:#ff7a00;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  z-index:1000;
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:#ff7a00;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;z-index:1000;
 }
 .menu-btn{font-size:24px;cursor:pointer}
 .logo{font-weight:bold;font-size:15px}
 
 /* ===== NAV ===== */
 .nav{
-  position:fixed;
-  top:56px;left:0;right:0;
-  background:#fff;
-  display:none;
-  flex-direction:column;
-  border-bottom:1px solid #ddd;
-  z-index:999;
+  position:fixed;top:56px;left:0;right:0;
+  background:#fff;display:none;flex-direction:column;
+  border-bottom:1px solid #ddd;z-index:999;
 }
 .nav a{
-  padding:14px;
-  text-decoration:none;
-  color:#333;
+  padding:14px;text-decoration:none;color:#333;
   border-bottom:1px solid #eee;
 }
-.nav a:last-child{border-bottom:none}
 .nav.show{display:flex}
 
 /* ===== MAIN ===== */
 .main{
-  padding-top:72px; /* FIX LỖI HEADER ĐÈ */
+  padding-top:96px; /* TÁCH HẲN HEADER */
   padding:16px;
-  max-width:600px;
+  max-width:1100px;
   margin:auto;
 }
 
-/* ===== SECTION ===== */
-.section{
+/* ===== INTRO BOX ===== */
+.intro{
   background:#fff;
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:16px;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:24px;
   box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.section h2{
-  color:#ff7a00;
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-.section p{
   font-size:14px;
-  line-height:1.6;
+  line-height:1.7;
   color:#444;
 }
 
-.highlight{
-  margin-top:12px;
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(4,1fr);}
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  transition:.25s;
+}
+.card:hover{transform:translateY(-3px)}
+
+.img-box{
+  position:relative;
+}
+.img-box img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:10px;left:10px;
+  background:#ff3d00;
+  color:#fff;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:999px;
+  font-weight:bold;
+}
+
+/* BODY */
+.card-body{
   padding:12px;
-  background:#fff7f0;
-  border-left:4px solid #ff7a00;
-  font-size:14px;
-  border-radius:8px;
+}
+.card-body h3{
+  font-size:15px;
+  margin-bottom:4px;
+}
+.card-body p{
+  font-size:13px;
+  color:#555;
+}
+
+/* BUTTONS */
+.btn-row{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+.btn{
+  flex:1;
+  padding:10px 0;
+  border-radius:999px;
+  border:none;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.btn-main{background:#ff7a00;color:#fff}
+.btn-sub{background:#eee;color:#333}
+
+/* ===== POPUP ===== */
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+.popup{
+  background:#fff;
+  width:90%;
+  max-width:420px;
+  border-radius:18px;
+  padding:18px;
+  position:relative;
+  animation:fade .25s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+.close{
+  position:absolute;
+  top:10px;right:14px;
+  font-size:22px;
+  cursor:pointer;
+}
+.popup h2{color:#ff7a00;margin-bottom:10px}
+.popup p{font-size:14px;line-height:1.6;color:#444}
+.popup .cta{
+  margin-top:14px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:999px;
+  background:#ff7a00;
+  color:#fff;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -103,47 +185,124 @@ header{
 
 <div class="main">
 
-  <div class="section">
-    <h2>🍢 Xiên Sạch Online</h2>
-    <p>
-      Xiên Sạch Online được tạo ra với mong muốn mang đến
-      những món xiên nướng <b>ngon – sạch – an toàn</b> cho mọi người.
-      Tất cả nguyên liệu đều được chọn lọc kỹ lưỡng và chế biến trong ngày.
-    </p>
+  <!-- INTRO -->
+  <div class="intro">
+    Chúng tôi mang đến các món <b>xiên chiên – combo ăn vặt</b> được chế biến trong ngày,
+    chỉ làm khi có đơn. Mục tiêu của Xiên Sạch Online là giúp bạn
+    <b>ăn ngon – ăn sạch – ăn yên tâm</b>.
   </div>
 
-  <div class="section">
-    <h2>🔥 Cam kết của chúng tôi</h2>
-    <p>
-      • Không bán đồ qua ngày<br>
-      • Sốt tách riêng, đảm bảo vệ sinh<br>
-      • Chế biến sau khi nhận đơn<br>
-      • Giao nhanh trong 20–40 phút
-    </p>
-  </div>
+  <!-- GRID 4 CARD -->
+  <div class="grid">
 
-  <div class="section">
-    <h2>💚 Vì sao chọn Xiên Sạch?</h2>
-    <p>
-      Chúng tôi không chỉ bán đồ ăn, mà còn bán <b>sự yên tâm</b>.
-      Mỗi đơn hàng đều được chuẩn bị như cho chính gia đình mình.
-    </p>
-    <div class="highlight">
-      📞 Có góp ý hay thắc mắc? Đừng ngại liên hệ với chúng tôi!
+    <!-- COMBO -->
+    <div class="card">
+      <div class="img-box">
+        <span class="badge">BÁN CHẠY</span>
+        <img src="https://sf-static.upanhlaylink.com/img/image_2026010271a21cd2819e7ba068024c5e349e4502.jpg">
+      </div>
+      <div class="card-body">
+        <h3>Combo</h3>
+        <p>Mix sẵn – ăn nhanh – no lâu</p>
+        <div class="btn-row">
+          <button class="btn btn-main" onclick="track('order_combo')">Đặt ngay</button>
+          <button class="btn btn-sub" onclick="openPopup('combo')">Chi tiết</button>
+        </div>
+      </div>
     </div>
-  </div>
 
+    <!-- XIÊN -->
+    <div class="card">
+      <div class="img-box">
+        <span class="badge" style="background:#28a745">ĐƯỢC CHỌN NHIỀU</span>
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260102efc20b1061cc3c0c7bf3d31b5403b2a2.jpg">
+      </div>
+      <div class="card-body">
+        <h3>Xiên lẻ</h3>
+        <p>Tự chọn theo khẩu vị</p>
+        <div class="btn-row">
+          <button class="btn btn-main" onclick="track('order_xien')">Đặt ngay</button>
+          <button class="btn btn-sub" onclick="openPopup('xien')">Chi tiết</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NƯỚC -->
+    <div class="card">
+      <div class="img-box">
+        <img src="https://sf-static.upanhlaylink.com/img/image_2026010278ebd291f235d865dfa0820f483d4441.jpg">
+      </div>
+      <div class="card-body">
+        <h3>Nước uống</h3>
+        <p>Ăn xiên phải có nước</p>
+        <div class="btn-row">
+          <button class="btn btn-main" onclick="track('order_drink')">Đặt ngay</button>
+          <button class="btn btn-sub" onclick="openPopup('drink')">Chi tiết</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEST -->
+    <div class="card">
+      <div class="img-box">
+        <span class="badge">BEST SELLER</span>
+        <img src="https://sf-static.upanhlaylink.com/img/image_2026010229cc60d25c66495723cbddf113ae0268.jpg">
+      </div>
+      <div class="card-body">
+        <h3>Best seller</h3>
+        <p>Món được khách quay lại nhiều</p>
+        <div class="btn-row">
+          <button class="btn btn-main" onclick="track('order_best')">Đặt ngay</button>
+          <button class="btn btn-sub" onclick="openPopup('best')">Chi tiết</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="overlay" id="overlay" onclick="closePopup(event)">
+  <div class="popup">
+    <div class="close" onclick="closePopup()">✕</div>
+    <h2 id="ptitle"></h2>
+    <p id="pcontent"></p>
+    <button class="cta" onclick="goMenu()">Đặt ngay</button>
+  </div>
 </div>
 
 <script>
-function toggleMenu(){
-  document.getElementById("navMenu").classList.toggle("show");
-}
+function toggleMenu(){navMenu.classList.toggle("show")}
 document.addEventListener("click",e=>{
-  if(!e.target.closest("header") && !e.target.closest(".nav")){
-    document.getElementById("navMenu").classList.remove("show");
+  if(!e.target.closest("header")&&!e.target.closest(".nav")){
+    navMenu.classList.remove("show")
   }
-});
+})
+
+function goMenu(){location.href="/menu"}
+
+function openPopup(t){
+  overlay.style.display="flex"
+  track("view_detail_"+t)
+  const data={
+    combo:"Combo được mix sẵn các xiên bán chạy nhất, chiên nóng sau khi nhận đơn, nước chấm tách riêng.",
+    xien:"Xiên lẻ cho người thích tự chọn. Tất cả chế biến trong ngày, không bán đồ qua ngày.",
+    drink:"Trà tắc, trà vải, nước ngọt giúp ăn xiên không ngán.",
+    best:"Những món được khách quay lại đặt nhiều nhất."
+  }
+  ptitle.innerText="Chi tiết sản phẩm"
+  pcontent.innerText=data[t]
+}
+function closePopup(e){
+  if(!e || e.target.id==="overlay"){
+    overlay.style.display="none"
+  }
+}
+
+/* TRACKING */
+function track(action){
+  console.log("TRACK:",action)
+}
 </script>
 
 </body>
