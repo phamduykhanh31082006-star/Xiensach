@@ -189,9 +189,9 @@ header{
 
   <!-- INTRO -->
   <div class="intro">
-    Chúng tôi mang đến các món <b>xiên chiên – combo ăn vặt</b> được chế biến trong ngày,
-    chỉ làm khi có đơn. Mục tiêu của Xiên Sạch Online là giúp bạn
-    <b>ăn ngon – ăn sạch – ăn yên tâm</b>.
+    Xiên Sạch Online là quán ăn vặt bán theo hình thức đặt hàng online – giao tận nơi, chuyên các món xiên sạch, dễ ăn, rõ nguồn gốc. Quán tập trung vào combo xiên thiết kế sẵn giúp khách dễ chọn, ăn no và tiết kiệm, đồng thời vẫn có xiên lẻ tự chọn theo sở thích cá nhân.
+
+Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm và chương trình tích điểm rõ ràng, để khách ăn càng nhiều càng có lợi. Chúng tôi cam kết giá bán minh bạch – phục vụ gọn gàng – chất lượng ổn định, để mỗi lần đặt hàng là một lần yên tâm.
   </div>
 
   <!-- GRID 4 CARD -->
@@ -221,7 +221,7 @@ header{
       </div>
       <div class="card-body">
         <h3>Xiên lẻ</h3>
-        <p>Tự chọn theo khẩu vị</p>
+        <p>Tự chọn theo khẩu vị mình thích.</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_xien')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('xien')">Chi tiết</button>
@@ -236,7 +236,7 @@ header{
       </div>
       <div class="card-body">
         <h3>Nước uống</h3>
-        <p>Ăn xiên phải có nước</p>
+        <p>Ăn xiên không thể thiếu nước được!</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_drink')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('drink')">Chi tiết</button>
@@ -287,10 +287,10 @@ function openPopup(t){
   overlay.style.display="flex"
   track("view_detail_"+t)
   const data={
-    combo:"Combo được mix sẵn các xiên bán chạy nhất, chiên nóng sau khi nhận đơn, nước chấm tách riêng.",
-    xien:"Xiên lẻ cho người thích tự chọn. Tất cả chế biến trong ngày, không bán đồ qua ngày.",
-    drink:"Trà tắc, trà vải, nước ngọt giúp ăn xiên không ngán.",
-    best:"Những món được khách quay lại đặt nhiều nhất."
+    combo:"Các combo xiên tại Xiên Sạch Online được thiết kế sẵn để khách dễ chọn – ăn no – tiết kiệm hơn so với mua lẻ. Mỗi combo đều được cân đối về số lượng, hương vị và giá trị, phù hợp cho ăn một mình hoặc đi nhóm, đặt nhanh là có ngay bữa ăn trọn vị.",
+    xien:"Xiên lẻ dành cho những ai muốn tự chọn theo đúng khẩu vị của mình. Bạn có thể gọi từng loại yêu thích, tăng giảm số lượng linh hoạt, dễ mix nhiều món trong một đơn. Phù hợp ăn thử, ăn thêm hoặc kết hợp cùng combo..",
+    drink:"Nước uống được chọn để dễ uống, mát và hợp khi ăn xiên, giúp đỡ ngấy và ăn thoải mái hơn. Có thể gọi kèm combo hoặc xiên lẻ cho trọn bữa, không cần mua thêm bên ngoài.",
+    best:"Best Seller là những món được khách đặt nhiều nhất và quay lại thường xuyên. Hương vị ổn định, dễ ăn, phù hợp với đa số khẩu vị, đặc biệt phù hợp nếu bạn là khách mới và chưa biết nên chọn món nào."
   }
   ptitle.innerText="Chi tiết sản phẩm"
   pcontent.innerText=data[t]

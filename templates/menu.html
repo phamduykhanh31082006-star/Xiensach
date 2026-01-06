@@ -69,9 +69,9 @@ header{
 
 /* ===== MAIN ===== */
 .main{
-  padding-top:120px;
-  padding-bottom:30px;
+  padding-top:72px;
 }
+
 
 /* ===== SECTION ===== */
 .section{
@@ -162,6 +162,35 @@ header{
 .toast.show{opacity:1}
 
 html{scroll-behavior:smooth}
+
+/* ===== MENU NOTE ===== */
+.menu-note{
+  margin:12px 16px 6px;
+  padding:14px 16px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  background:#fff7f0;
+  border:2px dashed #ffb380;
+  border-radius:18px;
+}
+
+.menu-note-icon{
+  font-size:22px;
+  line-height:1;
+}
+
+.menu-note-text{
+  font-size:13px;
+  color:#444;
+  line-height:1.5;
+}
+
+.menu-note-text b{
+  color:#ff7a00;
+}
+
+
 </style>
 </head>
 
@@ -191,6 +220,18 @@ html{scroll-behavior:smooth}
 
 <div class="main">
 
+<!-- ===== GHI CHÚ HÌNH ẢNH / ĐẶT TRƯỚC ===== -->
+<div class="menu-note">
+  <div class="menu-note-icon"></div>
+  <div class="menu-note-text">
+    <b>Hình ảnh mang tính chất minh hoạ</b><br>
+    Khách hàng <b>đặt trước bữa ăn</b> sẽ giúp shop chuẩn bị kỹ càng hơn nha.<br>
+    Chúc quý khách ăn ngon miệng, ăn là nhớ tới Xiên Sạch Online.<br>
+    
+  </div>
+</div>
+
+
 <!-- ===== COMBO ===== -->
 <!-- ===== COMBO ===== -->
 <div class="section" id="combo">
@@ -200,7 +241,7 @@ html{scroll-behavior:smooth}
     <div class="card-wrap">
       <div class="badge">BÁN CHẠY</div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x300">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601060015df728392fa8e9ee4e31486c28e57.jpg">
         <div class="card-body">
           <h3>Combo Độc Thân</h3>
           <div class="desc">Tự Kỉ Ăn Vặt</div>
@@ -213,43 +254,23 @@ html{scroll-behavior:smooth}
     <div class="card-wrap">
       <div class="badge">BEST SELLER</div>
       <div class="card">
-        <img src="https://via.placeholder.com/400x300">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601067c969399b2f919e3dce883c0064ebf35.jpg">
         <div class="card-body">
           <h3>Combo Tình Yêu</h3>
           <div class="desc">Đôi vợ chồng son</div>
-          <div class="price">55.000đ</div>
-          <button onclick="addToCart('Combo Tình Yêu',55000)">Thêm giỏ</button>
+          <div class="price">129.000đ</div>
+          <button onclick="addToCart('Combo Tình Yêu',129000)">Thêm giỏ</button>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <img src="https://via.placeholder.com/400x300">
+      <img src="https://sf-static.upanhlaylink.com/img/image_20260106adec8735935fabc54fd2482f3294a11e.jpg">
       <div class="card-body">
         <h3>Combo Tam Chiến</h3>
         <div class="desc">Bộ 3 rắn độc</div>
-        <div class="price">79.000đ</div>
-        <button onclick="addToCart('Combo Tam Chiến',79000)">Thêm giỏ</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/400x300">
-      <div class="card-body">
-        <h3>Combo Tứ Đại</h3>
-        <div class="desc">4 xiên đút chéo</div>
-        <div class="price">99.000đ</div>
-        <button onclick="addToCart('Combo Tứ Đại',99000)">Thêm giỏ</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://sf-static.upanhlaylink.com/img/image_2026010271a21cd2819e7ba068024c5e349e4502.jpg">
-      <div class="card-body">
-        <h3>Combo Huyền Bí</h3>
-        <div class="desc">Hé lộ một sự thật khi bạn ăn món này!!!</div>
-        <div class="price">234.500đ</div>
-        <button onclick="addToCart('Combo Huyền Bí',234500)">Thêm giỏ</button>
+        <div class="price">199.000đ</div>
+        <button onclick="addToCart('Combo Tam Chiến',199000)">Thêm giỏ</button>
       </div>
     </div>
 
@@ -257,7 +278,8 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260102b3c42ad4fd56876dc39e304386ceb777.jpg">
       <div class="card-body">
         <h3>Combo Bí Ẩn</h3>
-        <div class="desc">Bí ẩn sẽ được hé lộ khi bạn đặt món này!!!</div>
+        <div class="desc">60 viên</div>
+        <div class="desc">2 Nước Bí Ẩn?</div>
         <div class="price">299.000đ</div>
         <button onclick="addToCart('Combo Bí Ẩn',299000)">Thêm giỏ</button>
       </div>
@@ -275,6 +297,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260102efc20b1061cc3c0c7bf3d31b5403b2a2.jpg">
       <div class="card-body">
         <h3>Xúc Xích</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">10.000đ</div>
         <button onclick="addToCart('Xúc Xích',10000)">Thêm giỏ</button>
       </div>
@@ -284,6 +307,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010229cc60d25c66495723cbddf113ae0268.jpg">
       <div class="card-body">
         <h3>Nem Chua Rán</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">10.000đ</div>
         <button onclick="addToCart('Nem Chua Rán',10000)">Thêm giỏ</button>
       </div>
@@ -293,6 +317,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_202601043a2c05d26c12f298a2bae3b31ce672b2.jpg">
       <div class="card-body">
         <h3>Gà popcorn</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">6.000đ</div>
         <button onclick="addToCart('Gà popcorn',6000)">Thêm giỏ</button>
       </div>
@@ -302,6 +327,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260102ecc9bb8276295f41c20b86ae692f5d22.jpg">
       <div class="card-body">
         <h3>Tôm Viên Chiên</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">6.000đ</div>
         <button onclick="addToCart('Tôm Viên Chiên',6000)">Thêm giỏ</button>
       </div>
@@ -311,6 +337,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_202601021e0a6fe2ca48ddc39ebb8268ad6daeb7.jpg">
       <div class="card-body">
         <h3>Cá Viên Chiên</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">6.000đ</div>
         <button onclick="addToCart('Cá Viên Chiên',6000)">Thêm giỏ</button>
       </div>
@@ -320,6 +347,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010494cf33f095612086bbf099e581e7dd36.jpg">
       <div class="card-body">
         <h3>Xiên Mực Xoắn Ống</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">12.000đ</div>
         <button onclick="addToCart('Xiên Mực Xoắn Ống',12000)">Thêm giỏ</button>
       </div>
@@ -329,6 +357,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260104bd8a1860c19315380a196fdbdddb3073.jpg">
       <div class="card-body">
         <h3>Phô Mai Que</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">12.000đ</div>
         <button onclick="addToCart('Phô Mai Que',12000)">Thêm giỏ</button>
       </div>
@@ -338,6 +367,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010429d5eb1f14c86087c340711269ab2bf4.jpg">
       <div class="card-body">
         <h3>Xúc xích hồ lô</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">8.000đ</div>
         <button onclick="addToCart('Xúc xích hồ lô',8000)">Thêm giỏ</button>
       </div>
@@ -347,6 +377,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260104bd8a1860c19315380a196fdbdddb3073.jpg">
       <div class="card-body">
         <h3>Xiên Tôm Con</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">12.000đ</div>
         <button onclick="addToCart('Xiên Tôm Con',12000)">Thêm giỏ</button>
       </div>
@@ -356,6 +387,7 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010480bdd7906aca05d480032ed1aa6c8cce.jpg">
       <div class="card-body">
         <h3>Mực Khoanh</h3>
+        <div class="desc"><b>1 Xiên - 1 Cái</b></div>
         <div class="price">12.000đ</div>
         <button onclick="addToCart('Mực Khoanh',12000)">Thêm giỏ</button>
       </div>
@@ -370,29 +402,21 @@ html{scroll-behavior:smooth}
   <div class="grid">
 
     <div class="card">
-      <img src="https://via.placeholder.com/400x300">
+      <img src="https://sf-static.upanhlaylink.com/img/image_202601061b0ee7217bff7a0c554808d5d90ff20d.jpg">
       <div class="card-body">
         <h3>Trà tắc</h3>
-        <div class="price">12.000đ</div>
-        <button onclick="addToCart('Trà tắc',12000)">Thêm giỏ</button>
+        <div class="price">15.000đ</div>
+        <button onclick="addToCart('Trà tắc',15000)">Thêm giỏ</button>
       </div>
     </div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/400x300">
-      <div class="card-body">
-        <h3>Trà vải</h3>
-        <div class="price">12.000đ</div>
-        <button onclick="addToCart('Trà vải',12000)">Thêm giỏ</button>
-      </div>
-    </div>
 
     <div class="card">
       <img src="https://sf-static.upanhlaylink.com/img/image_20260102999a7dce208b6380064d36663c30fd2b.jpg">
       <div class="card-body">
         <h3>Coca Cola</h3>
-        <div class="price">10.000đ</div>
-        <button onclick="addToCart('Coca Cola',10000)">Thêm giỏ</button>
+        <div class="price">15.000đ</div>
+        <button onclick="addToCart('Coca Cola',15000)">Thêm giỏ</button>
       </div>
     </div>
 
@@ -400,8 +424,8 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_202601028226cbebf34d91828483296b06d1fff4.jpg">
       <div class="card-body">
         <h3>Nước suối</h3>
-        <div class="price">8.000đ</div>
-        <button onclick="addToCart('Nước suối',8000)">Thêm giỏ</button>
+        <div class="price">10.000đ</div>
+        <button onclick="addToCart('Nước suối',10000)">Thêm giỏ</button>
       </div>
     </div>
 
@@ -409,8 +433,8 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010278ebd291f235d865dfa0820f483d4441.jpg">
       <div class="card-body">
         <h3>Pepsi</h3>
-        <div class="price">10.000đ</div>
-        <button onclick="addToCart('Pepsi',10000)">Thêm giỏ</button>
+        <div class="price">15.000đ</div>
+        <button onclick="addToCart('Pepsi',15000)">Thêm giỏ</button>
       </div>
     </div>
 
@@ -418,8 +442,8 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_2026010274cc7b77db1a00d390f7fc80464b3a95.jpg">
       <div class="card-body">
         <h3>Sting đỏ</h3>
-        <div class="price">12.000đ</div>
-        <button onclick="addToCart('Sting đỏ',12000)">Thêm giỏ</button>
+        <div class="price">15.000đ</div>
+        <button onclick="addToCart('Sting đỏ',15000)">Thêm giỏ</button>
       </div>
     </div>
 
@@ -427,8 +451,8 @@ html{scroll-behavior:smooth}
       <img src="https://sf-static.upanhlaylink.com/img/image_20260102e04d3059db9ef176a63fd4e1d490dbf2.jpg">
       <div class="card-body">
         <h3>Sting vàng</h3>
-        <div class="price">12.000đ</div>
-        <button onclick="addToCart('Sting vàng',12000)">Thêm giỏ</button>
+        <div class="price">15.000đ</div>
+        <button onclick="addToCart('Sting vàng',15000)">Thêm giỏ</button>
       </div>
     </div>
 

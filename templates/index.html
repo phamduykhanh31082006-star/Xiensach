@@ -135,16 +135,156 @@ header{
   color:#444;
 }
 
+/* ===== PRICE BOARD ===== */
+.price-board{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  margin:16px;
+  border:2px solid #ffe2cc;
+}
+
+.price-board h3{
+  margin-bottom:12px;
+  color:#ff7a00;
+  font-size:16px;
+  text-align:center;
+}
+
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#fff7f0;
+  margin-bottom:8px;
+  font-size:14px;
+}
+
+.price-row b{
+  color:#ff7a00;
+}
+
+.price-note{
+  margin-top:8px;
+  font-size:12px;
+  color:#777;
+  text-align:center;
+}
+
+
+
+
+
+.notice-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+/* CARD CHÍNH */
+.notice-card{
+  width:90%;
+  max-width:380px;
+  background:#d9efff;
+  border-radius:26px;
+  position:relative;
+  padding-top:52px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* HEADER NỔI */
+.notice-header{
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  border-radius:22px;
+  padding:10px 18px;
+  min-width:240px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-weight:bold;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.notice-header button{
+  background:none;
+  border:none;
+  font-size:18px;
+  cursor:pointer;
+  margin-left:10px;
+}
+
+/* BODY */
+.notice-body{
+  padding:20px 18px 22px;
+}
+
+.notice-body h4{
+  margin-bottom:10px;
+  color:#ff7a00;
+  font-size:16px;
+}
+
+.notice-body ul{
+  font-size:14px;
+  line-height:1.7;
+  padding-left:18px;
+}
+
+.notice-body li{
+  margin-bottom:6px;
+}
+
+
 </style>
 </head>
 
 <body>
+
 
 <header>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div class="logo">XIÊN SẠCH ONLINE</div>
   <div class="cart" onclick="goCart()">🛒<span id="cartCount">0</span></div>
 </header>
+
+<div class="notice-overlay" id="noticeOverlay">
+  <div class="notice-card">
+
+    <!-- HEADER NỔI -->
+    <div class="notice-header">
+      <span>📢 BẢNG THÔNG BÁO</span>
+      <button onclick="closeNotice()">✕</button>
+    </div>
+
+    <!-- BODY -->
+    <div class="notice-body">
+      <h4>Hôm nay có gì..?</h4>
+      <ul>
+        <li>Hôm nay có <b>13 món xiên các loại khác nhau.</b></li>
+        <li>Shop hiện đang có chương trình hấp dẫn dành cho bạn.</li>
+        <li>Hiện tại shop chỉ có 2 loại nước chấm chua ngọt và sốt me</li>
+        <li>Đặt trước giúp shop chuẩn bị kỹ hơn</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
 
 <div class="nav" id="navMenu">
   <a href="/">🏠 Trang chủ</a>
@@ -168,10 +308,40 @@ header{
      <div class="notice">
   <div class="notice-title">🔔 Thông báo hôm nay</div>
   <ul>
-    <li>Shop khai trương có rất nhiều ưu đãi.</li>
-    <li>Hôm nay shop có 13 món nha.</li>
+    <li>Miễn Phí Ship Đại Học Phenikaa.</li>
+    <li>Hiện tại shop đang mở 13 món xiên.</li>
+    <li>Hiện tại shop chỉ có 2 loại nước chấm chua ngọt và sốt me</li>
+    <li>Cứ đặt combo bất kì được 1 nước miễn phí.</li>
     <li>Shop nhận đặt trước nhé.</li>
   </ul>
+</div>
+
+<!-- ===== BẢNG GIÁ XIÊN ===== -->
+<div class="price-board">
+  <h3>🍢 Bảng giá xiên</h3>
+
+  <div class="price-row">
+    <span>Viên ngon loại 1</span>
+    <b>2.000đ ~ 3.000đ</b>
+  </div>
+
+  <div class="price-row">
+    <span>Viên ngon loại 2</span>
+    <b>4.000đ ~ 5.000đ</b>
+  </div>
+
+  <div class="price-row">
+    <span>Viên ngon loại 3</span>
+    <b>6.000đ ~ 7.000đ</b>
+  </div>
+
+<div class="price-row">
+    <span>Khác</span>
+    <b>10.000đ</b>
+  </div>
+  <div class="price-note">
+    * Xiên lẻ: lựa chọn đơn tối thiểu 70.000đ
+  </div>
 </div>
 
 
@@ -181,39 +351,26 @@ header{
     <div class="combo-grid">
 
       <div class="card">
-        <img src="https://via.placeholder.com/300x200">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601060015df728392fa8e9ee4e31486c28e57.jpg">
         <h3>Combo Độc Thân</h3>
-        <div class="price">49.000đ</div>
+        <div class="price">69.000đ</div>
         <button onclick="goMenu()">Xem chi tiết</button>
       </div>
 
       <div class="card">
-        <img src="https://via.placeholder.com/300x200">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601067c969399b2f919e3dce883c0064ebf35.jpg">
         <h3>Combo Tình Yêu</h3>
-        <div class="price">89.000đ</div>
-        <button onclick="goMenu()">Xem chi tiết</button>
-      </div>
-
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200">
-        <h3>Combo Tam Chiến</h3>
         <div class="price">129.000đ</div>
         <button onclick="goMenu()">Xem chi tiết</button>
       </div>
-      
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200">
-        <h3>Combo Tứ Đại</h3>
-        <div class="price">169.000đ</div>
-        <button onclick="goMenu()">Xem chi tiết</button>
-      </div>
 
-<div class="card">
-        <img src="https://sf-static.upanhlaylink.com/img/image_2026010271a21cd2819e7ba068024c5e349e4502.jpg">
-        <h3>Combo Huyền Bí</h3>
-        <div class="price">234.500đ</div>
+      <div class="card">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260106adec8735935fabc54fd2482f3294a11e.jpg">
+        <h3>Combo Tam Chiến</h3>
+        <div class="price">199.000đ</div>
         <button onclick="goMenu()">Xem chi tiết</button>
       </div>
+      
 
 <div class="card">
         <img src="https://sf-static.upanhlaylink.com/img/image_20260102b3c42ad4fd56876dc39e304386ceb777.jpg">
@@ -262,6 +419,26 @@ updateCart();
 /* NAV */
 function goMenu(){location.href="/menu";}
 function goCart(){location.href="/cart";}
+
+// Hiện popup 1 lần mỗi lần vào web
+if(!sessionStorage.getItem("noticeShown")){
+  document.getElementById("noticeOverlay").style.display="flex";
+  sessionStorage.setItem("noticeShown","1");
+}else{
+  document.getElementById("noticeOverlay").style.display="none";
+}
+
+function closeNotice(){
+  document.getElementById("noticeOverlay").style.display="none";
+}
+
+// Chạm ngoài để tắt
+document.getElementById("noticeOverlay").addEventListener("click",e=>{
+  if(e.target.id==="noticeOverlay") closeNotice();
+});
+
+
+
 </script>
 
 </body>
