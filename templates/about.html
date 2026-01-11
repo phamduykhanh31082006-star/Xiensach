@@ -189,9 +189,9 @@ header{
 
   <!-- INTRO -->
   <div class="intro">
-    Xiên Sạch Online là quán ăn vặt bán theo hình thức đặt hàng online – giao tận nơi, chuyên các món xiên sạch, dễ ăn, rõ nguồn gốc. Quán tập trung vào combo xiên thiết kế sẵn giúp khách dễ chọn, ăn no và tiết kiệm, đồng thời vẫn có xiên lẻ tự chọn theo sở thích cá nhân.
-
-Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm và chương trình tích điểm rõ ràng, để khách ăn càng nhiều càng có lợi. Chúng tôi cam kết giá bán minh bạch – phục vụ gọn gàng – chất lượng ổn định, để mỗi lần đặt hàng là một lần yên tâm.
+    <li>ĐÓI GHÉ ĂN XIÊN.</li><br>
+    <li>VUI GHÉ COMBO.</li><br>
+    <li>HẾT TIỀN VẪN PHẢI GHÉ.</li>
   </div>
 
   <!-- GRID 4 CARD -->
@@ -201,11 +201,11 @@ Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm v
     <div class="card">
       <div class="img-box">
         <span class="badge">BÁN CHẠY</span>
-        <img src="https://sf-static.upanhlaylink.com/img/image_2026010271a21cd2819e7ba068024c5e349e4502.jpg">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601060015df728392fa8e9ee4e31486c28e57.jpg">
       </div>
       <div class="card-body">
-        <h3>Combo</h3>
-        <p>Mix sẵn – ăn nhanh – no lâu</p>
+        <h3>Combo Độc Thân</h3>
+        <p>Ấn chi tiết để xem</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_combo')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('combo')">Chi tiết</button>
@@ -217,11 +217,11 @@ Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm v
     <div class="card">
       <div class="img-box">
         <span class="badge" style="background:#28a745">ĐƯỢC CHỌN NHIỀU</span>
-        <img src="https://sf-static.upanhlaylink.com/img/image_20260102efc20b1061cc3c0c7bf3d31b5403b2a2.jpg">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202601067c969399b2f919e3dce883c0064ebf35.jpg">
       </div>
       <div class="card-body">
-        <h3>Xiên lẻ</h3>
-        <p>Tự chọn theo khẩu vị mình thích.</p>
+        <h3>Combo Tình Yêu</h3>
+        <p>Ấn chi tiết để xem</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_xien')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('xien')">Chi tiết</button>
@@ -232,11 +232,11 @@ Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm v
     <!-- NƯỚC -->
     <div class="card">
       <div class="img-box">
-        <img src="https://sf-static.upanhlaylink.com/img/image_2026010278ebd291f235d865dfa0820f483d4441.jpg">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260106adec8735935fabc54fd2482f3294a11e.jpg">
       </div>
       <div class="card-body">
-        <h3>Nước uống</h3>
-        <p>Ăn xiên không thể thiếu nước được!</p>
+        <h3>Combo Tam Chiến</h3>
+        <p>Ấn chi tiết để xem</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_drink')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('drink')">Chi tiết</button>
@@ -248,11 +248,11 @@ Ngoài đồ ăn, Xiên Sạch Online còn phục vụ nước uống đi kèm v
     <div class="card">
       <div class="img-box">
         <span class="badge">BEST SELLER</span>
-        <img src="https://sf-static.upanhlaylink.com/img/image_2026010229cc60d25c66495723cbddf113ae0268.jpg">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260102b3c42ad4fd56876dc39e304386ceb777.jpg">
       </div>
       <div class="card-body">
-        <h3>Best seller</h3>
-        <p>Món được khách quay lại nhiều</p>
+        <h3>Combo bí ẩn</h3>
+        <p>Món ăn được khách quay lại nhiều</p>
         <div class="btn-row">
           <button class="btn btn-main" onclick="track('order_best')">Đặt ngay</button>
           <button class="btn btn-sub" onclick="openPopup('best')">Chi tiết</button>
@@ -287,10 +287,10 @@ function openPopup(t){
   overlay.style.display="flex"
   track("view_detail_"+t)
   const data={
-    combo:"Các combo xiên tại Xiên Sạch Online được thiết kế sẵn để khách dễ chọn – ăn no – tiết kiệm hơn so với mua lẻ. Mỗi combo đều được cân đối về số lượng, hương vị và giá trị, phù hợp cho ăn một mình hoặc đi nhóm, đặt nhanh là có ngay bữa ăn trọn vị.",
-    xien:"Xiên lẻ dành cho những ai muốn tự chọn theo đúng khẩu vị của mình. Bạn có thể gọi từng loại yêu thích, tăng giảm số lượng linh hoạt, dễ mix nhiều món trong một đơn. Phù hợp ăn thử, ăn thêm hoặc kết hợp cùng combo..",
-    drink:"Nước uống được chọn để dễ uống, mát và hợp khi ăn xiên, giúp đỡ ngấy và ăn thoải mái hơn. Có thể gọi kèm combo hoặc xiên lẻ cho trọn bữa, không cần mua thêm bên ngoài.",
-    best:"Best Seller là những món được khách đặt nhiều nhất và quay lại thường xuyên. Hương vị ổn định, dễ ăn, phù hợp với đa số khẩu vị, đặc biệt phù hợp nếu bạn là khách mới và chưa biết nên chọn món nào."
+    combo:"Tôm viên, Cá viên, Chả mực xoắn, Tôm con, Xúc xích hồ lô, Mực khoanh",
+    xien:"Thả lẩu, Hồ lô, Tôm, Tôm viên, Cá viên, Sủi cảo, Hải sản, Phô mai que, Mực xoắn, Gà viên, Mực khoanh, Đậu hũ",
+    drink:"Mực xoắn, Tôm viên, Cá viên, Hồ lô, Tôm, Thả lẩu, Gà viên, Mực khoanh, Phô mai que, Xúc xích, Hải sản, Đậu hũ, Sủi cảo",
+    best:"Con số bí ẩn xứng đáng với đồng vàng bạn bỏ ra"
   }
   ptitle.innerText="Chi tiết sản phẩm"
   pcontent.innerText=data[t]

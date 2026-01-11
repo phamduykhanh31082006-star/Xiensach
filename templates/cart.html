@@ -11,189 +11,134 @@ body{background:#f6f6f6}
 
 /* ===== HEADER ===== */
 header{
-  background:#ff7a00;
-  color:#fff;
-  padding:12px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:1000;
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:#ff7a00;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;z-index:1000;
 }
-.left{display:flex;align-items:center;gap:12px}
-.menu-btn{font-size:22px;cursor:pointer}
-.logo{font-weight:bold}
-
-.cart-icon{
-  position:relative;
-  cursor:pointer;
-}
-.cart-icon span{
-  position:absolute;
-  top:-6px;right:-8px;
-  background:#e74c3c;
-  color:#fff;
-  font-size:11px;
-  padding:2px 6px;
-  border-radius:999px;
+.menu-btn{font-size:24px;cursor:pointer}
+.logo{font-weight:bold;font-size:15px}
+.cart{position:relative;font-size:22px;cursor:pointer}
+.cart span{
+  position:absolute;top:-6px;right:-6px;
+  background:red;color:#fff;
+  font-size:11px;padding:2px 6px;border-radius:50%;
 }
 
 /* ===== NAV ===== */
 .nav{
-  position:fixed;
-  top:56px;left:0;right:0;
-  background:#fff;
-  border-bottom:1px solid #ddd;
-  display:none;
-  z-index:1500;
+  position:fixed;top:56px;left:0;right:0;
+  background:#fff;display:none;flex-direction:column;
+  border-bottom:1px solid #ddd;z-index:999;
 }
 .nav a{
-  display:block;
-  padding:12px 16px;
-  text-decoration:none;
-  color:#333;
+  padding:14px;text-decoration:none;color:#333;
   border-bottom:1px solid #eee;
 }
-.nav.show{display:block}
-
-.overlay{
-  position:fixed;inset:0;
-  background:transparent;
-  display:none;
-  z-index:1400;
-}
-.overlay.show{display:block}
+.nav.show{display:flex}
 
 /* ===== MAIN ===== */
-.main{
-  padding:16px;
-  max-width:600px;
-  margin:auto;
-}
+.main{padding:72px 16px;max-width:600px;margin:auto}
+
+/* ===== CLEAR ===== */
+.clear-bar{text-align:right;margin-bottom:8px}
+.clear-all{font-size:13px;color:#e74c3c;font-weight:600;cursor:pointer}
 
 /* ===== EMPTY ===== */
 .empty{
-  background:#fff;
-  border-radius:16px;
-  padding:28px;
-  text-align:center;
+  background:#fff;border-radius:16px;padding:28px;text-align:center
 }
 .empty button{
-  margin-top:16px;
-  padding:12px 20px;
-  border:none;
-  border-radius:999px;
-  background:#ff7a00;
-  color:#fff;
-  font-weight:bold;
+  margin-top:16px;padding:12px 20px;border:none;
+  border-radius:999px;background:#ff7a00;color:#fff;font-weight:bold
 }
 
 /* ===== ITEM ===== */
 .item{
-  background:#fff;
-  border-radius:16px;
-  padding:14px;
-  margin-bottom:12px;
+  background:#fff;border-radius:16px;padding:14px;
+  margin-bottom:12px
 }
-.item-top{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:6px;
-}
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+.item-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.qty{display:flex;align-items:center;gap:8px}
 .qty button{
-  width:28px;height:28px;
-  border:none;border-radius:6px;
-  background:#ff7a00;color:#fff;
+  width:28px;height:28px;border:none;border-radius:6px;
+  background:#ff7a00;color:#fff
 }
 .qty .del{background:#e74c3c}
 
 /* ===== TOTAL ===== */
 .total-box{
-  background:#fff;
-  border-radius:18px;
-  padding:16px;
-  margin-top:16px;
+  background:#fff;border-radius:18px;padding:16px;margin-top:16px
 }
 .total-line{
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
-  color:#ff7a00;
-}
-.note-60k{
-  font-size:12px;
-  color:#777;
-  margin-top:6px;
+  display:flex;justify-content:space-between;
+  font-weight:bold;color:#ff7a00
 }
 .order-btn{
-  margin-top:14px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:18px;
-  background:#ff7a00;
-  color:#fff;
-  font-size:16px;
-  font-weight:bold;
+  margin-top:14px;width:100%;padding:14px;border:none;
+  border-radius:18px;background:#ff7a00;color:#fff;
+  font-size:16px;font-weight:bold
 }
+.order-btn:disabled{opacity:.6}
 
 /* ===== POPUP ===== */
 .popup{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.5);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  display:none;align-items:center;justify-content:center;z-index:2000
 }
 .popup.show{display:flex}
 .popup-box{
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  width:90%;
-  max-width:360px;
-  position:relative;
+  background:#fff;border-radius:18px;padding:18px;
+  width:90%;max-width:360px;position:relative
 }
 .close{
-  position:absolute;
-  top:10px;right:12px;
-  font-size:20px;
-  cursor:pointer;
+  position:absolute;top:10px;right:12px;
+  font-size:20px;cursor:pointer
 }
 
-/* SAUCE */
+/* ===== SAUCE UX ===== */
 .sauce-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
   gap:10px;
   margin:14px 0;
 }
 .sauce{
-  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
   border:1px solid #ddd;
-  border-radius:999px;
-  text-align:center;
+  border-radius:14px;
   cursor:pointer;
+  font-size:14px;
 }
+.sauce span{font-size:12px;color:#777}
 .sauce.active{
   border-color:#ff7a00;
   background:#fff7f0;
+  font-weight:bold
+}
+.extra-box{
+  margin-top:10px;
+  padding:12px;
+  border-radius:14px;
+  border:1px dashed #ffb380;
+  background:#fffaf5;
+  font-size:14px;
+}
+.temp-total{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+  font-weight:bold;
+  color:#ff7a00
 }
 
-/* FORM */
+/* ===== FORM ===== */
 input,textarea{
-  width:100%;
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  margin-bottom:10px;
+  width:100%;padding:10px;border-radius:12px;
+  border:1px solid #ddd;margin-bottom:10px
 }
 </style>
 </head>
@@ -201,16 +146,14 @@ input,textarea{
 <body>
 
 <header>
-  <div class="left">
-    <div class="menu-btn" onclick="toggleNav()">☰</div>
-    <div class="logo">GIỎ HÀNG</div>
-  </div>
-  <div class="cart-icon" onclick="location.href='/cart'">
-    🛒 <span id="cartCount">0</span>
+  <div class="menu-btn" id="menuBtn">☰</div>
+  <div class="logo">GIỎ HÀNG</div>
+  <div class="cart" onclick="location.href='/cart'">
+    🛒<span id="cartCount">0</span>
   </div>
 </header>
 
-<div class="nav" id="nav">
+<div class="nav" id="navMenu">
   <a href="/">🏠 Trang chủ</a>
   <a href="/menu">🍢 Menu</a>
   <a href="/cart">🛒 Giỏ hàng</a>
@@ -218,186 +161,178 @@ input,textarea{
   <a href="/about">ℹ️ Giới thiệu</a>
   <a href="/contact">📞 Liên hệ</a>
 </div>
-<div class="overlay" id="overlay" onclick="closeNav()"></div>
 
 <div class="main" id="app"></div>
 
-<!-- POPUP SAUCE -->
+<!-- ===== POPUP SAUCE ===== -->
 <div class="popup" id="saucePopup">
   <div class="popup-box">
     <span class="close" onclick="closeSauce()">✕</span>
-    <b>Chọn nước chấm (tối đa 2)</b>
+
+    <b>🥣 Chọn nước chấm</b>
+
     <div class="sauce-grid">
-      <div class="sauce" onclick="toggleSauce(this)">Tương ớt</div>
-      <div class="sauce" onclick="toggleSauce(this)">Tương cà</div>
-      <div class="sauce" onclick="toggleSauce(this)">Sốt me</div>
-      <div class="sauce" onclick="toggleSauce(this)">Tương Chua Ngọt</div>
+      <div class="sauce" onclick="toggleSauce(this)">
+        Chua ngọt <span>Mặc định</span>
+      </div>
+      <div class="sauce" onclick="toggleSauce(this)">
+        Sốt me <span>Đậm vị</span>
+      </div>
     </div>
+
+    <div class="extra-box">
+      <label>
+        <input type="checkbox" id="rimCheck" onchange="updateTempTotal()">
+        Rim sốt me <b style="color:#ff7a00">+10.000đ</b>
+      </label>
+    </div>
+
+    <div class="temp-total">
+      <span>Tạm tính</span>
+      <span id="tempTotal">0đ</span>
+    </div>
+
     <button class="order-btn" onclick="openForm()">Tiếp tục</button>
   </div>
 </div>
 
-<!-- POPUP FORM -->
+<!-- ===== FORM ===== -->
 <div class="popup" id="formPopup">
   <div class="popup-box">
     <span class="close" onclick="closeForm()">✕</span>
 
     <form method="POST" action="/place-order" onsubmit="return prepareSubmit()">
       <input name="name" placeholder="Họ tên *" required>
-      <input name="phone" placeholder="Số điện thoại *" required>
+      <input name="phone" placeholder="SĐT *" required pattern="0[0-9]{9}">
       <input name="address" placeholder="Địa chỉ *" required>
       <textarea name="note" placeholder="Ghi chú"></textarea>
+
+      <input type="text" name="website" style="display:none">
 
       <input type="hidden" name="cart_text" id="cart_text">
       <input type="hidden" name="sauce_text" id="sauce_text">
       <input type="hidden" name="total" id="total">
+      <input type="hidden" name="order_token" id="order_token">
+      <input type="hidden" name="timestamp" id="timestamp">
 
-      <button class="order-btn" type="submit">ĐẶT HÀNG</button>
+      <button class="order-btn" id="submitBtn" type="submit">
+        ĐẶT HÀNG
+      </button>
     </form>
   </div>
 </div>
 
 <script>
-const app = document.getElementById("app");
-let sauces = [];
+/* ===== MENU ===== */
+menuBtn.onclick = ()=>navMenu.classList.toggle("show");
+document.addEventListener("click",e=>{
+  if(!navMenu.contains(e.target)&&!menuBtn.contains(e.target)){
+    navMenu.classList.remove("show");
+  }
+});
 
-/* NAV */
-function toggleNav(){
-  nav.classList.toggle("show");
-  overlay.classList.toggle("show");
-}
-function closeNav(){
-  nav.classList.remove("show");
-  overlay.classList.remove("show");
-}
-
-/* CART CORE */
-function getCart(){
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
-function saveCart(cart){
-  localStorage.setItem("cart", JSON.stringify(cart));
-  render();
-}
-function getTotalQty(){
-  return getCart().reduce((s,i)=>s+i.qty,0);
-}
+/* ===== CART ===== */
+function getCart(){return JSON.parse(localStorage.getItem("cart"))||[]}
 function updateCartCount(){
-  document.getElementById("cartCount").innerText = getTotalQty();
+  cartCount.innerText = getCart().reduce((s,i)=>s+i.qty,0);
 }
 
-/* RENDER */
-let total = 0;
-function render(){
-  const cart = getCart();
-  updateCartCount();
+/* ===== RENDER ===== */
+const app = document.getElementById("app");
+let sauces=[], totalBase=0, isSubmitting=false;
 
+function render(){
+  const cart=getCart(); updateCartCount();
   if(!cart.length){
-    app.innerHTML = `
-      <div class="empty">
-        <h3>Giỏ hàng trống</h3>
-        <button onclick="location.href='/menu'">Quay lại menu</button>
-      </div>`;
+    app.innerHTML=`<div class="empty"><h3>Giỏ hàng trống</h3>
+    <button onclick="location.href='/menu'">Quay lại menu</button></div>`;
     return;
   }
-
-  total = 0;
-  let hasXienLe = false;
-  let html = "";
-
+  totalBase=0;
+  let html=`<div class="clear-bar">
+    <span class="clear-all" onclick="clearCart()">Xoá tất cả</span></div>`;
   cart.forEach((i,idx)=>{
-    total += i.price * i.qty;
-    if(i.price <= 12000) hasXienLe = true;
-
-    html += `
-    <div class="item">
-      <div class="item-top">
-        <b>${i.name}</b>
-        <span>${(i.price*i.qty).toLocaleString()}đ</span>
-      </div>
+    totalBase+=i.price*i.qty;
+    html+=`<div class="item">
+      <div class="item-top"><b>${i.name}</b>
+      <span>${(i.price*i.qty).toLocaleString()}đ</span></div>
       <div class="qty">
-        <button onclick="chg(${idx},-1)">-</button>
-        ${i.qty}
+        <button onclick="chg(${idx},-1)">-</button>${i.qty}
         <button onclick="chg(${idx},1)">+</button>
         <button class="del" onclick="delItem(${idx})">❌</button>
-      </div>
-    </div>`;
+      </div></div>`;
   });
-
-  html += `
-  <div class="total-box">
-    <div class="total-line">
-      <span>Tổng cộng</span>
-      <span>${total.toLocaleString()}đ</span>
-    </div>
-    ${hasXienLe ? `<div class="note-60k">* Xiên lẻ tự chọn: đơn tối thiểu 60.000đ</div>` : ``}
-    <button class="order-btn" onclick="openSauce(${hasXienLe})">ĐẶT HÀNG</button>
+  html+=`<div class="total-box">
+    <div class="total-line"><span>Tổng cộng</span>
+    <span>${totalBase.toLocaleString()}đ</span></div>
+    <button class="order-btn" onclick="openSauce()">ĐẶT HÀNG</button>
   </div>`;
-
-  app.innerHTML = html;
+  app.innerHTML=html;
 }
 
-/* QTY */
-function chg(i,d){
-  const c = getCart();
-  c[i].qty += d;
-  if(c[i].qty <= 0) c.splice(i,1);
-  saveCart(c);
-}
-function delItem(i){
-  const c = getCart();
-  c.splice(i,1);
-  saveCart(c);
+/* ===== ACTION ===== */
+function chg(i,d){const c=getCart();c[i].qty+=d;if(c[i].qty<=0)c.splice(i,1);
+localStorage.setItem("cart",JSON.stringify(c));render();}
+function delItem(i){const c=getCart();c.splice(i,1);
+localStorage.setItem("cart",JSON.stringify(c));render();}
+function clearCart(){
+  if(!confirm("Xoá toàn bộ giỏ hàng?"))return;
+  localStorage.removeItem("cart");render();updateCartCount();
 }
 
-/* POPUP SAUCE */
-function openSauce(hasXienLe){
-  if(hasXienLe && total < 60000){
-    alert("Đơn xiên lẻ cần tối thiểu 60.000đ");
-    return;
-  }
-  sauces = [];
+/* ===== SAUCE ===== */
+function openSauce(){
+  sauces=[];rimCheck.checked=false;
   document.querySelectorAll(".sauce").forEach(s=>s.classList.remove("active"));
   saucePopup.classList.add("show");
+  updateTempTotal();
 }
-function closeSauce(){ saucePopup.classList.remove("show"); }
-
+function closeSauce(){saucePopup.classList.remove("show")}
 function toggleSauce(el){
+  const name=el.childNodes[0].textContent.trim();
   if(el.classList.contains("active")){
     el.classList.remove("active");
-    sauces = sauces.filter(s=>s!==el.innerText);
+    sauces=sauces.filter(s=>s!==name);
   }else{
-    if(sauces.length>=2) return;
-    el.classList.add("active");
-    sauces.push(el.innerText);
+    if(sauces.length>=2)return;
+    el.classList.add("active");sauces.push(name);
   }
 }
-
-/* FORM */
-function openForm(){
-  closeSauce();
-  formPopup.classList.add("show");
+function updateTempTotal(){
+  tempTotal.innerText=(totalBase+(rimCheck.checked?10000:0)).toLocaleString()+"đ";
 }
-function closeForm(){ formPopup.classList.remove("show"); }
 
-/* SUBMIT */
+/* ===== FORM ===== */
+function openForm(){closeSauce();formPopup.classList.add("show")}
+function closeForm(){formPopup.classList.remove("show")}
 function prepareSubmit(){
-  const cart = getCart();
-  cart_text.value = cart.map(i=>`${i.name} x${i.qty}`).join("; ");
-  sauce_text.value = sauces.join(", ");
-  document.getElementById("total").value = total;
+  if(isSubmitting)return false;
+  const cart=getCart(); if(!cart.length)return false;
+  const finalTotal=totalBase+(rimCheck.checked?10000:0);
 
-  // reset cart SAU submit
-  localStorage.removeItem("cart");
-  setTimeout(()=>updateCartCount(),500);
+  cart_text.value=cart.map(i=>`${i.name} x${i.qty}`).join("; ");
+  sauce_text.value=(sauces.length?sauces.join(", "):"Chua ngọt")
+    +(rimCheck.checked?" | Rim sốt me (+10.000đ)":"");
+  total.value=finalTotal;
+  order_token.value=crypto.randomUUID();
+  timestamp.value=Date.now();
 
+  isSubmitting=true;
+  submitBtn.disabled=true;
+  submitBtn.innerText="ĐANG GỬI...";
   return true;
 }
 
 /* INIT */
-render();
-</script>
+render();updateCartCount();
 
+// ===== SPAM WARNING =====
+const params = new URLSearchParams(window.location.search);
+if(params.get("spam") === "1"){
+  alert("⏳ Bạn vừa đặt hàng xong.\nVui lòng đợi vài phút rồi đặt tiếp nhé!");
+}
+
+</script>
 
 </body>
 </html>
